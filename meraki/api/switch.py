@@ -1,4 +1,4 @@
-import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class Switch(object):
@@ -20,8 +20,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'ports'],
             'operation': 'getDeviceSwitchPorts'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/ports'
+        resource = f'/devices/{prepare(serial)}/switch/ports'
 
         return self._session.get(metadata, resource)
         
@@ -42,8 +41,7 @@ class Switch(object):
             'tags': ['switch', 'liveTools', 'ports'],
             'operation': 'cycleDeviceSwitchPorts'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/ports/cycle'
+        resource = f'/devices/{prepare(serial)}/switch/ports/cycle'
 
         body_params = ['ports', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -68,8 +66,7 @@ class Switch(object):
             'tags': ['switch', 'monitor', 'ports', 'statuses'],
             'operation': 'getDeviceSwitchPortsStatuses'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/ports/statuses'
+        resource = f'/devices/{prepare(serial)}/switch/ports/statuses'
 
         query_params = ['t0', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -94,8 +91,7 @@ class Switch(object):
             'tags': ['switch', 'monitor', 'ports', 'statuses', 'packets'],
             'operation': 'getDeviceSwitchPortsStatusesPackets'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/ports/statuses/packets'
+        resource = f'/devices/{prepare(serial)}/switch/ports/statuses/packets'
 
         query_params = ['t0', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -117,9 +113,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'ports'],
             'operation': 'getDeviceSwitchPort'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        portId = urllib.parse.quote(str(portId), safe='')
-        resource = f'/devices/{serial}/switch/ports/{portId}'
+        resource = f'/devices/{prepare(serial)}/switch/ports/{prepare(portId)}'
 
         return self._session.get(metadata, resource)
         
@@ -178,9 +172,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'ports'],
             'operation': 'updateDeviceSwitchPort'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        portId = urllib.parse.quote(str(portId), safe='')
-        resource = f'/devices/{serial}/switch/ports/{portId}'
+        resource = f'/devices/{prepare(serial)}/switch/ports/{prepare(portId)}'
 
         body_params = ['name', 'tags', 'enabled', 'poeEnabled', 'type', 'vlan', 'voiceVlan', 'allowedVlans', 'isolationEnabled', 'rstpEnabled', 'stpGuard', 'linkNegotiation', 'portScheduleId', 'udld', 'accessPolicyType', 'accessPolicyNumber', 'macAllowList', 'stickyMacAllowList', 'stickyMacAllowListLimit', 'stormControlEnabled', 'adaptivePolicyGroupId', 'peerSgtCapable', 'flexibleStackingEnabled', 'daiTrusted', 'profile', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -201,8 +193,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces'],
             'operation': 'getDeviceSwitchRoutingInterfaces'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces'
 
         return self._session.get(metadata, resource)
         
@@ -235,8 +226,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces'],
             'operation': 'createDeviceSwitchRoutingInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces'
 
         body_params = ['name', 'subnet', 'interfaceIp', 'multicastRouting', 'vlanId', 'defaultGateway', 'ospfSettings', 'ospfV3', 'ipv6', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -258,9 +248,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces'],
             'operation': 'getDeviceSwitchRoutingInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces/{interfaceId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces/{prepare(interfaceId)}'
 
         return self._session.get(metadata, resource)
         
@@ -294,9 +282,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces'],
             'operation': 'updateDeviceSwitchRoutingInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces/{interfaceId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces/{prepare(interfaceId)}'
 
         body_params = ['name', 'subnet', 'interfaceIp', 'multicastRouting', 'vlanId', 'defaultGateway', 'ospfSettings', 'ospfV3', 'ipv6', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -318,9 +304,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces'],
             'operation': 'deleteDeviceSwitchRoutingInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces/{interfaceId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces/{prepare(interfaceId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -339,9 +323,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces', 'dhcp'],
             'operation': 'getDeviceSwitchRoutingInterfaceDhcp'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces/{interfaceId}/dhcp'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces/{prepare(interfaceId)}/dhcp'
 
         return self._session.get(metadata, resource)
         
@@ -388,9 +370,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'interfaces', 'dhcp'],
             'operation': 'updateDeviceSwitchRoutingInterfaceDhcp'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/devices/{serial}/switch/routing/interfaces/{interfaceId}/dhcp'
+        resource = f'/devices/{prepare(serial)}/switch/routing/interfaces/{prepare(interfaceId)}/dhcp'
 
         body_params = ['dhcpMode', 'dhcpRelayServerIps', 'dhcpLeaseTime', 'dnsNameserversOption', 'dnsCustomNameservers', 'bootOptionsEnabled', 'bootNextServer', 'bootFileName', 'dhcpOptions', 'reservedIpRanges', 'fixedIpAssignments', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -411,8 +391,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'staticRoutes'],
             'operation': 'getDeviceSwitchRoutingStaticRoutes'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/routing/staticRoutes'
+        resource = f'/devices/{prepare(serial)}/switch/routing/staticRoutes'
 
         return self._session.get(metadata, resource)
         
@@ -437,8 +416,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'staticRoutes'],
             'operation': 'createDeviceSwitchRoutingStaticRoute'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/routing/staticRoutes'
+        resource = f'/devices/{prepare(serial)}/switch/routing/staticRoutes'
 
         body_params = ['name', 'subnet', 'nextHopIp', 'advertiseViaOspfEnabled', 'preferOverOspfRoutesEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -460,9 +438,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'staticRoutes'],
             'operation': 'getDeviceSwitchRoutingStaticRoute'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/devices/{serial}/switch/routing/staticRoutes/{staticRouteId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/staticRoutes/{prepare(staticRouteId)}'
 
         return self._session.get(metadata, resource)
         
@@ -488,9 +464,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'staticRoutes'],
             'operation': 'updateDeviceSwitchRoutingStaticRoute'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/devices/{serial}/switch/routing/staticRoutes/{staticRouteId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/staticRoutes/{prepare(staticRouteId)}'
 
         body_params = ['name', 'subnet', 'nextHopIp', 'advertiseViaOspfEnabled', 'preferOverOspfRoutesEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -512,9 +486,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'staticRoutes'],
             'operation': 'deleteDeviceSwitchRoutingStaticRoute'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/devices/{serial}/switch/routing/staticRoutes/{staticRouteId}'
+        resource = f'/devices/{prepare(serial)}/switch/routing/staticRoutes/{prepare(staticRouteId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -532,8 +504,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'warmSpare'],
             'operation': 'getDeviceSwitchWarmSpare'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/warmSpare'
+        resource = f'/devices/{prepare(serial)}/switch/warmSpare'
 
         return self._session.get(metadata, resource)
         
@@ -555,8 +526,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'warmSpare'],
             'operation': 'updateDeviceSwitchWarmSpare'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/switch/warmSpare'
+        resource = f'/devices/{prepare(serial)}/switch/warmSpare'
 
         body_params = ['enabled', 'spareSerial', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -577,8 +547,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessControlLists'],
             'operation': 'getNetworkSwitchAccessControlLists'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/accessControlLists'
+        resource = f'/networks/{prepare(networkId)}/switch/accessControlLists'
 
         return self._session.get(metadata, resource)
         
@@ -599,8 +568,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessControlLists'],
             'operation': 'updateNetworkSwitchAccessControlLists'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/accessControlLists'
+        resource = f'/networks/{prepare(networkId)}/switch/accessControlLists'
 
         body_params = ['rules', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -621,8 +589,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessPolicies'],
             'operation': 'getNetworkSwitchAccessPolicies'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/accessPolicies'
+        resource = f'/networks/{prepare(networkId)}/switch/accessPolicies'
 
         return self._session.get(metadata, resource)
         
@@ -666,8 +633,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessPolicies'],
             'operation': 'createNetworkSwitchAccessPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/accessPolicies'
+        resource = f'/networks/{prepare(networkId)}/switch/accessPolicies'
 
         body_params = ['name', 'radiusServers', 'radius', 'guestPortBouncing', 'radiusTestingEnabled', 'radiusCoaSupportEnabled', 'radiusAccountingEnabled', 'radiusAccountingServers', 'radiusGroupAttribute', 'hostMode', 'accessPolicyType', 'increaseAccessSpeed', 'guestVlanId', 'dot1x', 'voiceVlanClients', 'urlRedirectWalledGardenEnabled', 'urlRedirectWalledGardenRanges', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -689,9 +655,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessPolicies'],
             'operation': 'getNetworkSwitchAccessPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        accessPolicyNumber = urllib.parse.quote(str(accessPolicyNumber), safe='')
-        resource = f'/networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}'
+        resource = f'/networks/{prepare(networkId)}/switch/accessPolicies/{prepare(accessPolicyNumber)}'
 
         return self._session.get(metadata, resource)
         
@@ -736,9 +700,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessPolicies'],
             'operation': 'updateNetworkSwitchAccessPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        accessPolicyNumber = urllib.parse.quote(str(accessPolicyNumber), safe='')
-        resource = f'/networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}'
+        resource = f'/networks/{prepare(networkId)}/switch/accessPolicies/{prepare(accessPolicyNumber)}'
 
         body_params = ['name', 'radiusServers', 'radius', 'guestPortBouncing', 'radiusTestingEnabled', 'radiusCoaSupportEnabled', 'radiusAccountingEnabled', 'radiusAccountingServers', 'radiusGroupAttribute', 'hostMode', 'accessPolicyType', 'increaseAccessSpeed', 'guestVlanId', 'dot1x', 'voiceVlanClients', 'urlRedirectWalledGardenEnabled', 'urlRedirectWalledGardenRanges', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -760,9 +722,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'accessPolicies'],
             'operation': 'deleteNetworkSwitchAccessPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        accessPolicyNumber = urllib.parse.quote(str(accessPolicyNumber), safe='')
-        resource = f'/networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}'
+        resource = f'/networks/{prepare(networkId)}/switch/accessPolicies/{prepare(accessPolicyNumber)}'
 
         return self._session.delete(metadata, resource)
         
@@ -780,8 +740,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'alternateManagementInterface'],
             'operation': 'getNetworkSwitchAlternateManagementInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/alternateManagementInterface'
+        resource = f'/networks/{prepare(networkId)}/switch/alternateManagementInterface'
 
         return self._session.get(metadata, resource)
         
@@ -805,8 +764,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'alternateManagementInterface'],
             'operation': 'updateNetworkSwitchAlternateManagementInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/alternateManagementInterface'
+        resource = f'/networks/{prepare(networkId)}/switch/alternateManagementInterface'
 
         body_params = ['enabled', 'vlanId', 'protocols', 'switches', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -836,8 +794,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcp', 'v4', 'servers', 'seen'],
             'operation': 'getNetworkSwitchDhcpV4ServersSeen'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcp/v4/servers/seen'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcp/v4/servers/seen'
 
         query_params = ['t0', 'timespan', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -858,8 +815,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy'],
             'operation': 'getNetworkSwitchDhcpServerPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy'
 
         return self._session.get(metadata, resource)
         
@@ -888,8 +844,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy'],
             'operation': 'updateNetworkSwitchDhcpServerPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy'
 
         body_params = ['alerts', 'defaultPolicy', 'allowedServers', 'blockedServers', 'arpInspection', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -917,8 +872,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy', 'arpInspection', 'trustedServers'],
             'operation': 'getNetworkSwitchDhcpServerPolicyArpInspectionTrustedServers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy/arpInspection/trustedServers'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy/arpInspection/trustedServers'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -944,8 +898,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy', 'arpInspection', 'trustedServers'],
             'operation': 'createNetworkSwitchDhcpServerPolicyArpInspectionTrustedServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy/arpInspection/trustedServers'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy/arpInspection/trustedServers'
 
         body_params = ['mac', 'vlan', 'ipv4', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -972,9 +925,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy', 'arpInspection', 'trustedServers'],
             'operation': 'updateNetworkSwitchDhcpServerPolicyArpInspectionTrustedServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        trustedServerId = urllib.parse.quote(str(trustedServerId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy/arpInspection/trustedServers/{trustedServerId}'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy/arpInspection/trustedServers/{prepare(trustedServerId)}'
 
         body_params = ['mac', 'vlan', 'ipv4', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -996,9 +947,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy', 'arpInspection', 'trustedServers'],
             'operation': 'deleteNetworkSwitchDhcpServerPolicyArpInspectionTrustedServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        trustedServerId = urllib.parse.quote(str(trustedServerId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy/arpInspection/trustedServers/{trustedServerId}'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy/arpInspection/trustedServers/{prepare(trustedServerId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1023,8 +972,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dhcpServerPolicy', 'arpInspection', 'warnings', 'byDevice'],
             'operation': 'getNetworkSwitchDhcpServerPolicyArpInspectionWarningsByDevice'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dhcpServerPolicy/arpInspection/warnings/byDevice'
+        resource = f'/networks/{prepare(networkId)}/switch/dhcpServerPolicy/arpInspection/warnings/byDevice'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1045,8 +993,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dscpToCosMappings'],
             'operation': 'getNetworkSwitchDscpToCosMappings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dscpToCosMappings'
+        resource = f'/networks/{prepare(networkId)}/switch/dscpToCosMappings'
 
         return self._session.get(metadata, resource)
         
@@ -1067,8 +1014,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'dscpToCosMappings'],
             'operation': 'updateNetworkSwitchDscpToCosMappings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/dscpToCosMappings'
+        resource = f'/networks/{prepare(networkId)}/switch/dscpToCosMappings'
 
         body_params = ['mappings', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1089,8 +1035,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'linkAggregations'],
             'operation': 'getNetworkSwitchLinkAggregations'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/linkAggregations'
+        resource = f'/networks/{prepare(networkId)}/switch/linkAggregations'
 
         return self._session.get(metadata, resource)
         
@@ -1112,8 +1057,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'linkAggregations'],
             'operation': 'createNetworkSwitchLinkAggregation'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/linkAggregations'
+        resource = f'/networks/{prepare(networkId)}/switch/linkAggregations'
 
         body_params = ['switchPorts', 'switchProfilePorts', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1139,9 +1083,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'linkAggregations'],
             'operation': 'updateNetworkSwitchLinkAggregation'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        linkAggregationId = urllib.parse.quote(str(linkAggregationId), safe='')
-        resource = f'/networks/{networkId}/switch/linkAggregations/{linkAggregationId}'
+        resource = f'/networks/{prepare(networkId)}/switch/linkAggregations/{prepare(linkAggregationId)}'
 
         body_params = ['switchPorts', 'switchProfilePorts', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1163,9 +1105,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'linkAggregations'],
             'operation': 'deleteNetworkSwitchLinkAggregation'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        linkAggregationId = urllib.parse.quote(str(linkAggregationId), safe='')
-        resource = f'/networks/{networkId}/switch/linkAggregations/{linkAggregationId}'
+        resource = f'/networks/{prepare(networkId)}/switch/linkAggregations/{prepare(linkAggregationId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1183,8 +1123,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'mtu'],
             'operation': 'getNetworkSwitchMtu'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/mtu'
+        resource = f'/networks/{prepare(networkId)}/switch/mtu'
 
         return self._session.get(metadata, resource)
         
@@ -1206,8 +1145,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'mtu'],
             'operation': 'updateNetworkSwitchMtu'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/mtu'
+        resource = f'/networks/{prepare(networkId)}/switch/mtu'
 
         body_params = ['defaultMtuSize', 'overrides', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1228,8 +1166,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'portSchedules'],
             'operation': 'getNetworkSwitchPortSchedules'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/portSchedules'
+        resource = f'/networks/{prepare(networkId)}/switch/portSchedules'
 
         return self._session.get(metadata, resource)
         
@@ -1254,8 +1191,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'portSchedules'],
             'operation': 'createNetworkSwitchPortSchedule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/portSchedules'
+        resource = f'/networks/{prepare(networkId)}/switch/portSchedules'
 
         body_params = ['name', 'portSchedule', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1277,9 +1213,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'portSchedules'],
             'operation': 'deleteNetworkSwitchPortSchedule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        portScheduleId = urllib.parse.quote(str(portScheduleId), safe='')
-        resource = f'/networks/{networkId}/switch/portSchedules/{portScheduleId}'
+        resource = f'/networks/{prepare(networkId)}/switch/portSchedules/{prepare(portScheduleId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1305,9 +1239,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'portSchedules'],
             'operation': 'updateNetworkSwitchPortSchedule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        portScheduleId = urllib.parse.quote(str(portScheduleId), safe='')
-        resource = f'/networks/{networkId}/switch/portSchedules/{portScheduleId}'
+        resource = f'/networks/{prepare(networkId)}/switch/portSchedules/{prepare(portScheduleId)}'
 
         body_params = ['name', 'portSchedule', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1328,8 +1260,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules'],
             'operation': 'getNetworkSwitchQosRules'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules'
 
         return self._session.get(metadata, resource)
         
@@ -1360,8 +1291,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules'],
             'operation': 'createNetworkSwitchQosRule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules'
 
         body_params = ['vlan', 'protocol', 'srcPort', 'srcPortRange', 'dstPort', 'dstPortRange', 'dscp', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1382,8 +1312,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules', 'order'],
             'operation': 'getNetworkSwitchQosRulesOrder'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules/order'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules/order'
 
         return self._session.get(metadata, resource)
         
@@ -1404,8 +1333,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules', 'order'],
             'operation': 'updateNetworkSwitchQosRulesOrder'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules/order'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules/order'
 
         body_params = ['ruleIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1427,9 +1355,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules'],
             'operation': 'getNetworkSwitchQosRule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qosRuleId = urllib.parse.quote(str(qosRuleId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules/{qosRuleId}'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules/{prepare(qosRuleId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1448,9 +1374,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules'],
             'operation': 'deleteNetworkSwitchQosRule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qosRuleId = urllib.parse.quote(str(qosRuleId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules/{qosRuleId}'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules/{prepare(qosRuleId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1482,9 +1406,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'qosRules'],
             'operation': 'updateNetworkSwitchQosRule'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qosRuleId = urllib.parse.quote(str(qosRuleId), safe='')
-        resource = f'/networks/{networkId}/switch/qosRules/{qosRuleId}'
+        resource = f'/networks/{prepare(networkId)}/switch/qosRules/{prepare(qosRuleId)}'
 
         body_params = ['vlan', 'protocol', 'srcPort', 'srcPortRange', 'dstPort', 'dstPortRange', 'dscp', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1505,8 +1427,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast'],
             'operation': 'getNetworkSwitchRoutingMulticast'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast'
 
         return self._session.get(metadata, resource)
         
@@ -1528,8 +1449,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast'],
             'operation': 'updateNetworkSwitchRoutingMulticast'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast'
 
         body_params = ['defaultSettings', 'overrides', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1550,8 +1470,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast', 'rendezvousPoints'],
             'operation': 'getNetworkSwitchRoutingMulticastRendezvousPoints'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast/rendezvousPoints'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast/rendezvousPoints'
 
         return self._session.get(metadata, resource)
         
@@ -1573,8 +1492,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast', 'rendezvousPoints'],
             'operation': 'createNetworkSwitchRoutingMulticastRendezvousPoint'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast/rendezvousPoints'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast/rendezvousPoints'
 
         body_params = ['interfaceIp', 'multicastGroup', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1596,9 +1514,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast', 'rendezvousPoints'],
             'operation': 'getNetworkSwitchRoutingMulticastRendezvousPoint'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        rendezvousPointId = urllib.parse.quote(str(rendezvousPointId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast/rendezvousPoints/{rendezvousPointId}'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast/rendezvousPoints/{prepare(rendezvousPointId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1617,9 +1533,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast', 'rendezvousPoints'],
             'operation': 'deleteNetworkSwitchRoutingMulticastRendezvousPoint'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        rendezvousPointId = urllib.parse.quote(str(rendezvousPointId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast/rendezvousPoints/{rendezvousPointId}'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast/rendezvousPoints/{prepare(rendezvousPointId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1642,9 +1556,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'multicast', 'rendezvousPoints'],
             'operation': 'updateNetworkSwitchRoutingMulticastRendezvousPoint'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        rendezvousPointId = urllib.parse.quote(str(rendezvousPointId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/multicast/rendezvousPoints/{rendezvousPointId}'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/multicast/rendezvousPoints/{prepare(rendezvousPointId)}'
 
         body_params = ['interfaceIp', 'multicastGroup', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1665,8 +1577,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'ospf'],
             'operation': 'getNetworkSwitchRoutingOspf'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/ospf'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/ospf'
 
         return self._session.get(metadata, resource)
         
@@ -1693,8 +1604,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'routing', 'ospf'],
             'operation': 'updateNetworkSwitchRoutingOspf'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/routing/ospf'
+        resource = f'/networks/{prepare(networkId)}/switch/routing/ospf'
 
         body_params = ['enabled', 'helloTimerInSeconds', 'deadTimerInSeconds', 'areas', 'v3', 'md5AuthenticationEnabled', 'md5AuthenticationKey', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1715,8 +1625,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'settings'],
             'operation': 'getNetworkSwitchSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/settings'
+        resource = f'/networks/{prepare(networkId)}/switch/settings'
 
         return self._session.get(metadata, resource)
         
@@ -1741,8 +1650,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'settings'],
             'operation': 'updateNetworkSwitchSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/settings'
+        resource = f'/networks/{prepare(networkId)}/switch/settings'
 
         body_params = ['vlan', 'useCombinedPower', 'powerExceptions', 'uplinkClientSampling', 'macBlocklist', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1763,8 +1671,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'getNetworkSwitchStacks'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks'
 
         return self._session.get(metadata, resource)
         
@@ -1786,8 +1693,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'createNetworkSwitchStack'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks'
 
         body_params = ['name', 'serials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1809,9 +1715,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'getNetworkSwitchStack'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1830,9 +1734,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'deleteNetworkSwitchStack'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1854,9 +1756,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'addNetworkSwitchStack'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/add'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/add'
 
         body_params = ['serial', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1881,9 +1781,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks'],
             'operation': 'removeNetworkSwitchStack'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/remove'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/remove'
 
         body_params = ['serial', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1905,9 +1803,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces'],
             'operation': 'getNetworkSwitchStackRoutingInterfaces'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces'
 
         return self._session.get(metadata, resource)
         
@@ -1940,9 +1836,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces'],
             'operation': 'createNetworkSwitchStackRoutingInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces'
 
         body_params = ['name', 'subnet', 'interfaceIp', 'multicastRouting', 'vlanId', 'defaultGateway', 'ospfSettings', 'ipv6', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1965,10 +1859,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces'],
             'operation': 'getNetworkSwitchStackRoutingInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces/{interfaceId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces/{prepare(interfaceId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2002,10 +1893,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces'],
             'operation': 'updateNetworkSwitchStackRoutingInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces/{interfaceId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces/{prepare(interfaceId)}'
 
         body_params = ['name', 'subnet', 'interfaceIp', 'multicastRouting', 'vlanId', 'defaultGateway', 'ospfSettings', 'ipv6', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2028,10 +1916,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces'],
             'operation': 'deleteNetworkSwitchStackRoutingInterface'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces/{interfaceId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces/{prepare(interfaceId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2051,10 +1936,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces', 'dhcp'],
             'operation': 'getNetworkSwitchStackRoutingInterfaceDhcp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces/{interfaceId}/dhcp'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces/{prepare(interfaceId)}/dhcp'
 
         return self._session.get(metadata, resource)
         
@@ -2103,10 +1985,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'interfaces', 'dhcp'],
             'operation': 'updateNetworkSwitchStackRoutingInterfaceDhcp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        interfaceId = urllib.parse.quote(str(interfaceId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/interfaces/{interfaceId}/dhcp'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/interfaces/{prepare(interfaceId)}/dhcp'
 
         body_params = ['dhcpMode', 'dhcpRelayServerIps', 'dhcpLeaseTime', 'dnsNameserversOption', 'dnsCustomNameservers', 'bootOptionsEnabled', 'bootNextServer', 'bootFileName', 'dhcpOptions', 'reservedIpRanges', 'fixedIpAssignments', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2128,9 +2007,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'staticRoutes'],
             'operation': 'getNetworkSwitchStackRoutingStaticRoutes'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/staticRoutes'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/staticRoutes'
 
         return self._session.get(metadata, resource)
         
@@ -2156,9 +2033,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'staticRoutes'],
             'operation': 'createNetworkSwitchStackRoutingStaticRoute'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/staticRoutes'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/staticRoutes'
 
         body_params = ['name', 'subnet', 'nextHopIp', 'advertiseViaOspfEnabled', 'preferOverOspfRoutesEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2181,10 +2056,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'staticRoutes'],
             'operation': 'getNetworkSwitchStackRoutingStaticRoute'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/staticRoutes/{staticRouteId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/staticRoutes/{prepare(staticRouteId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2211,10 +2083,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'staticRoutes'],
             'operation': 'updateNetworkSwitchStackRoutingStaticRoute'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/staticRoutes/{staticRouteId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/staticRoutes/{prepare(staticRouteId)}'
 
         body_params = ['name', 'subnet', 'nextHopIp', 'advertiseViaOspfEnabled', 'preferOverOspfRoutesEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2237,10 +2106,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stacks', 'routing', 'staticRoutes'],
             'operation': 'deleteNetworkSwitchStackRoutingStaticRoute'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        switchStackId = urllib.parse.quote(str(switchStackId), safe='')
-        staticRouteId = urllib.parse.quote(str(staticRouteId), safe='')
-        resource = f'/networks/{networkId}/switch/stacks/{switchStackId}/routing/staticRoutes/{staticRouteId}'
+        resource = f'/networks/{prepare(networkId)}/switch/stacks/{prepare(switchStackId)}/routing/staticRoutes/{prepare(staticRouteId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2258,8 +2124,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stormControl'],
             'operation': 'getNetworkSwitchStormControl'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stormControl'
+        resource = f'/networks/{prepare(networkId)}/switch/stormControl'
 
         return self._session.get(metadata, resource)
         
@@ -2282,8 +2147,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stormControl'],
             'operation': 'updateNetworkSwitchStormControl'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stormControl'
+        resource = f'/networks/{prepare(networkId)}/switch/stormControl'
 
         body_params = ['broadcastThreshold', 'multicastThreshold', 'unknownUnicastThreshold', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2304,8 +2168,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stp'],
             'operation': 'getNetworkSwitchStp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stp'
+        resource = f'/networks/{prepare(networkId)}/switch/stp'
 
         return self._session.get(metadata, resource)
         
@@ -2327,8 +2190,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'stp'],
             'operation': 'updateNetworkSwitchStp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/switch/stp'
+        resource = f'/networks/{prepare(networkId)}/switch/stp'
 
         body_params = ['rstpEnabled', 'stpBridgePriority', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2350,9 +2212,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'configTemplates', 'profiles'],
             'operation': 'getOrganizationConfigTemplateSwitchProfiles'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}/switch/profiles'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}/switch/profiles'
 
         return self._session.get(metadata, resource)
         
@@ -2372,10 +2232,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'configTemplates', 'profiles', 'ports'],
             'operation': 'getOrganizationConfigTemplateSwitchProfilePorts'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        profileId = urllib.parse.quote(str(profileId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}/switch/profiles/{profileId}/ports'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}/switch/profiles/{prepare(profileId)}/ports'
 
         return self._session.get(metadata, resource)
         
@@ -2396,11 +2253,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'configTemplates', 'profiles', 'ports'],
             'operation': 'getOrganizationConfigTemplateSwitchProfilePort'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        profileId = urllib.parse.quote(str(profileId), safe='')
-        portId = urllib.parse.quote(str(portId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}/switch/profiles/{profileId}/ports/{portId}'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}/switch/profiles/{prepare(profileId)}/ports/{prepare(portId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2459,11 +2312,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'configTemplates', 'profiles', 'ports'],
             'operation': 'updateOrganizationConfigTemplateSwitchProfilePort'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        profileId = urllib.parse.quote(str(profileId), safe='')
-        portId = urllib.parse.quote(str(portId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}/switch/profiles/{profileId}/ports/{portId}'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}/switch/profiles/{prepare(profileId)}/ports/{prepare(portId)}'
 
         body_params = ['name', 'tags', 'enabled', 'poeEnabled', 'type', 'vlan', 'voiceVlan', 'allowedVlans', 'isolationEnabled', 'rstpEnabled', 'stpGuard', 'linkNegotiation', 'portScheduleId', 'udld', 'accessPolicyType', 'accessPolicyNumber', 'macAllowList', 'stickyMacAllowList', 'stickyMacAllowListLimit', 'stormControlEnabled', 'flexibleStackingEnabled', 'daiTrusted', 'profile', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2489,8 +2338,7 @@ class Switch(object):
             'tags': ['switch', 'monitor', 'summary', 'power', 'history'],
             'operation': 'getOrganizationSummarySwitchPowerHistory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/switch/power/history'
+        resource = f'/organizations/{prepare(organizationId)}/summary/switch/power/history'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2515,8 +2363,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'devices'],
             'operation': 'cloneOrganizationSwitchDevices'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/switch/devices/clone'
+        resource = f'/organizations/{prepare(organizationId)}/switch/devices/clone'
 
         body_params = ['sourceSerial', 'targetSerials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2552,8 +2399,7 @@ class Switch(object):
             'tags': ['switch', 'configure', 'ports', 'bySwitch'],
             'operation': 'getOrganizationSwitchPortsBySwitch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/switch/ports/bySwitch'
+        resource = f'/organizations/{prepare(organizationId)}/switch/ports/bySwitch'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'portProfileIds', 'name', 'mac', 'macs', 'serial', 'serials', 'configurationUpdatedAfter', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
