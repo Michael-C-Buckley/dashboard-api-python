@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncSm:
@@ -23,8 +24,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'bypassActivationLockAttempts'],
             'operation': 'createNetworkSmBypassActivationLockAttempt'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/bypassActivationLockAttempts'
+        resource = f'/networks/{prepare(networkId)}/sm/bypassActivationLockAttempts'
 
         body_params = ['ids', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -46,9 +46,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'bypassActivationLockAttempts'],
             'operation': 'getNetworkSmBypassActivationLockAttempt'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        attemptId = urllib.parse.quote(str(attemptId), safe='')
-        resource = f'/networks/{networkId}/sm/bypassActivationLockAttempts/{attemptId}'
+        resource = f'/networks/{prepare(networkId)}/sm/bypassActivationLockAttempts/{prepare(attemptId)}'
 
         return self._session.get(metadata, resource)
         
@@ -85,8 +83,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'getNetworkSmDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices'
+        resource = f'/networks/{prepare(networkId)}/sm/devices'
 
         query_params = ['fields', 'wifiMacs', 'serials', 'ids', 'uuids', 'scope', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -119,8 +116,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'checkinNetworkSmDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/checkin'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/checkin'
 
         body_params = ['wifiMacs', 'ids', 'serials', 'scope', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -147,8 +143,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'fields'],
             'operation': 'updateNetworkSmDevicesFields'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/fields'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/fields'
 
         body_params = ['wifiMac', 'id', 'serial', 'deviceFields', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -176,8 +171,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'lockNetworkSmDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/lock'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/lock'
 
         body_params = ['wifiMacs', 'ids', 'serials', 'scope', 'pin', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -206,8 +200,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'modifyNetworkSmDevicesTags'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/modifyTags'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/modifyTags'
 
         body_params = ['wifiMacs', 'ids', 'serials', 'scope', 'tags', 'updateAction', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -235,8 +228,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'moveNetworkSmDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/move'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/move'
 
         body_params = ['wifiMacs', 'ids', 'serials', 'scope', 'newNetwork', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -263,8 +255,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'wipeNetworkSmDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/wipe'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/wipe'
 
         body_params = ['wifiMac', 'id', 'serial', 'pin', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -286,9 +277,7 @@ class AsyncSm:
             'tags': ['sm', 'monitor', 'devices', 'cellularUsageHistory'],
             'operation': 'getNetworkSmDeviceCellularUsageHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/cellularUsageHistory'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/cellularUsageHistory'
 
         return self._session.get(metadata, resource)
         
@@ -307,9 +296,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'certs'],
             'operation': 'getNetworkSmDeviceCerts'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/certs'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/certs'
 
         return self._session.get(metadata, resource)
         
@@ -335,9 +322,7 @@ class AsyncSm:
             'tags': ['sm', 'monitor', 'devices', 'connectivity'],
             'operation': 'getNetworkSmDeviceConnectivity'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/connectivity'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/connectivity'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -366,9 +351,7 @@ class AsyncSm:
             'tags': ['sm', 'monitor', 'devices', 'desktopLogs'],
             'operation': 'getNetworkSmDeviceDesktopLogs'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/desktopLogs'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/desktopLogs'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -397,9 +380,7 @@ class AsyncSm:
             'tags': ['sm', 'monitor', 'devices', 'deviceCommandLogs'],
             'operation': 'getNetworkSmDeviceDeviceCommandLogs'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/deviceCommandLogs'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/deviceCommandLogs'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -421,9 +402,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'deviceProfiles'],
             'operation': 'getNetworkSmDeviceDeviceProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/deviceProfiles'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/deviceProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -446,9 +425,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'installNetworkSmDeviceApps'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/installApps'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/installApps'
 
         body_params = ['appIds', 'force', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -470,9 +447,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'networkAdapters'],
             'operation': 'getNetworkSmDeviceNetworkAdapters'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/networkAdapters'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/networkAdapters'
 
         return self._session.get(metadata, resource)
         
@@ -498,9 +473,7 @@ class AsyncSm:
             'tags': ['sm', 'monitor', 'devices', 'performanceHistory'],
             'operation': 'getNetworkSmDevicePerformanceHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/performanceHistory'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/performanceHistory'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -522,9 +495,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'refreshNetworkSmDeviceDetails'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/refreshDetails'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/refreshDetails'
 
         return self._session.post(metadata, resource)
         
@@ -543,9 +514,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'restrictions'],
             'operation': 'getNetworkSmDeviceRestrictions'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/restrictions'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/restrictions'
 
         return self._session.get(metadata, resource)
         
@@ -564,9 +533,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'securityCenters'],
             'operation': 'getNetworkSmDeviceSecurityCenters'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/securityCenters'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/securityCenters'
 
         return self._session.get(metadata, resource)
         
@@ -585,9 +552,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'softwares'],
             'operation': 'getNetworkSmDeviceSoftwares'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/softwares'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/softwares'
 
         return self._session.get(metadata, resource)
         
@@ -606,9 +571,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'unenrollNetworkSmDevice'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/unenroll'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/unenroll'
 
         return self._session.post(metadata, resource)
         
@@ -630,9 +593,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices'],
             'operation': 'uninstallNetworkSmDeviceApps'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/uninstallApps'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/uninstallApps'
 
         body_params = ['appIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -654,9 +615,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'devices', 'wlanLists'],
             'operation': 'getNetworkSmDeviceWlanLists'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        deviceId = urllib.parse.quote(str(deviceId), safe='')
-        resource = f'/networks/{networkId}/sm/devices/{deviceId}/wlanLists'
+        resource = f'/networks/{prepare(networkId)}/sm/devices/{prepare(deviceId)}/wlanLists'
 
         return self._session.get(metadata, resource)
         
@@ -674,8 +633,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'profiles'],
             'operation': 'getNetworkSmProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/profiles'
+        resource = f'/networks/{prepare(networkId)}/sm/profiles'
 
         return self._session.get(metadata, resource)
         
@@ -696,8 +654,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'targetGroups'],
             'operation': 'getNetworkSmTargetGroups'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/targetGroups'
+        resource = f'/networks/{prepare(networkId)}/sm/targetGroups'
 
         query_params = ['withDetails', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -722,8 +679,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'targetGroups'],
             'operation': 'createNetworkSmTargetGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/targetGroups'
+        resource = f'/networks/{prepare(networkId)}/sm/targetGroups'
 
         body_params = ['name', 'scope', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -748,9 +704,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'targetGroups'],
             'operation': 'getNetworkSmTargetGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        targetGroupId = urllib.parse.quote(str(targetGroupId), safe='')
-        resource = f'/networks/{networkId}/sm/targetGroups/{targetGroupId}'
+        resource = f'/networks/{prepare(networkId)}/sm/targetGroups/{prepare(targetGroupId)}'
 
         query_params = ['withDetails', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -776,9 +730,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'targetGroups'],
             'operation': 'updateNetworkSmTargetGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        targetGroupId = urllib.parse.quote(str(targetGroupId), safe='')
-        resource = f'/networks/{networkId}/sm/targetGroups/{targetGroupId}'
+        resource = f'/networks/{prepare(networkId)}/sm/targetGroups/{prepare(targetGroupId)}'
 
         body_params = ['name', 'scope', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -800,9 +752,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'targetGroups'],
             'operation': 'deleteNetworkSmTargetGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        targetGroupId = urllib.parse.quote(str(targetGroupId), safe='')
-        resource = f'/networks/{networkId}/sm/targetGroups/{targetGroupId}'
+        resource = f'/networks/{prepare(networkId)}/sm/targetGroups/{prepare(targetGroupId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -827,8 +777,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'trustedAccessConfigs'],
             'operation': 'getNetworkSmTrustedAccessConfigs'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/trustedAccessConfigs'
+        resource = f'/networks/{prepare(networkId)}/sm/trustedAccessConfigs'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -856,8 +805,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'userAccessDevices'],
             'operation': 'getNetworkSmUserAccessDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/userAccessDevices'
+        resource = f'/networks/{prepare(networkId)}/sm/userAccessDevices'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -879,9 +827,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'userAccessDevices'],
             'operation': 'deleteNetworkSmUserAccessDevice'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        userAccessDeviceId = urllib.parse.quote(str(userAccessDeviceId), safe='')
-        resource = f'/networks/{networkId}/sm/userAccessDevices/{userAccessDeviceId}'
+        resource = f'/networks/{prepare(networkId)}/sm/userAccessDevices/{prepare(userAccessDeviceId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -905,8 +851,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'users'],
             'operation': 'getNetworkSmUsers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sm/users'
+        resource = f'/networks/{prepare(networkId)}/sm/users'
 
         query_params = ['ids', 'usernames', 'emails', 'scope', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -934,9 +879,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'users', 'deviceProfiles'],
             'operation': 'getNetworkSmUserDeviceProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        userId = urllib.parse.quote(str(userId), safe='')
-        resource = f'/networks/{networkId}/sm/users/{userId}/deviceProfiles'
+        resource = f'/networks/{prepare(networkId)}/sm/users/{prepare(userId)}/deviceProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -955,9 +898,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'users', 'softwares'],
             'operation': 'getNetworkSmUserSoftwares'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        userId = urllib.parse.quote(str(userId), safe='')
-        resource = f'/networks/{networkId}/sm/users/{userId}/softwares'
+        resource = f'/networks/{prepare(networkId)}/sm/users/{prepare(userId)}/softwares'
 
         return self._session.get(metadata, resource)
         
@@ -975,8 +916,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'apnsCert'],
             'operation': 'getOrganizationSmApnsCert'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sm/apnsCert'
+        resource = f'/organizations/{prepare(organizationId)}/sm/apnsCert'
 
         return self._session.get(metadata, resource)
         
@@ -994,8 +934,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'vppAccounts'],
             'operation': 'getOrganizationSmVppAccounts'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sm/vppAccounts'
+        resource = f'/organizations/{prepare(organizationId)}/sm/vppAccounts'
 
         return self._session.get(metadata, resource)
         
@@ -1014,9 +953,7 @@ class AsyncSm:
             'tags': ['sm', 'configure', 'vppAccounts'],
             'operation': 'getOrganizationSmVppAccount'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        vppAccountId = urllib.parse.quote(str(vppAccountId), safe='')
-        resource = f'/organizations/{organizationId}/sm/vppAccounts/{vppAccountId}'
+        resource = f'/organizations/{prepare(organizationId)}/sm/vppAccounts/{prepare(vppAccountId)}'
 
         return self._session.get(metadata, resource)
         
