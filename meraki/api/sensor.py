@@ -1,4 +1,4 @@
-import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class Sensor(object):
@@ -20,8 +20,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'relationships'],
             'operation': 'getDeviceSensorRelationships'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/sensor/relationships'
+        resource = f'/devices/{prepare(serial)}/sensor/relationships'
 
         return self._session.get(metadata, resource)
         
@@ -42,8 +41,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'relationships'],
             'operation': 'updateDeviceSensorRelationships'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/sensor/relationships'
+        resource = f'/devices/{prepare(serial)}/sensor/relationships'
 
         body_params = ['livestream', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -64,8 +62,7 @@ class Sensor(object):
             'tags': ['sensor', 'monitor', 'alerts', 'current', 'overview', 'byMetric'],
             'operation': 'getNetworkSensorAlertsCurrentOverviewByMetric'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/current/overview/byMetric'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/current/overview/byMetric'
 
         return self._session.get(metadata, resource)
         
@@ -89,8 +86,7 @@ class Sensor(object):
             'tags': ['sensor', 'monitor', 'alerts', 'overview', 'byMetric'],
             'operation': 'getNetworkSensorAlertsOverviewByMetric'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/overview/byMetric'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/overview/byMetric'
 
         query_params = ['t0', 't1', 'timespan', 'interval', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -111,8 +107,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'alerts', 'profiles'],
             'operation': 'getNetworkSensorAlertsProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/profiles'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/profiles'
 
         return self._session.get(metadata, resource)
         
@@ -137,8 +132,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'alerts', 'profiles'],
             'operation': 'createNetworkSensorAlertsProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/profiles'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/profiles'
 
         body_params = ['name', 'schedule', 'conditions', 'recipients', 'serials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -160,9 +154,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'alerts', 'profiles'],
             'operation': 'getNetworkSensorAlertsProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/profiles/{id}'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/profiles/{prepare(id)}'
 
         return self._session.get(metadata, resource)
         
@@ -188,9 +180,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'alerts', 'profiles'],
             'operation': 'updateNetworkSensorAlertsProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/profiles/{id}'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/profiles/{prepare(id)}'
 
         body_params = ['name', 'schedule', 'conditions', 'recipients', 'serials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -212,9 +202,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'alerts', 'profiles'],
             'operation': 'deleteNetworkSensorAlertsProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/networks/{networkId}/sensor/alerts/profiles/{id}'
+        resource = f'/networks/{prepare(networkId)}/sensor/alerts/profiles/{prepare(id)}'
 
         return self._session.delete(metadata, resource)
         
@@ -232,8 +220,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'mqttBrokers'],
             'operation': 'getNetworkSensorMqttBrokers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/mqttBrokers'
+        resource = f'/networks/{prepare(networkId)}/sensor/mqttBrokers'
 
         return self._session.get(metadata, resource)
         
@@ -252,9 +239,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'mqttBrokers'],
             'operation': 'getNetworkSensorMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        mqttBrokerId = urllib.parse.quote(str(mqttBrokerId), safe='')
-        resource = f'/networks/{networkId}/sensor/mqttBrokers/{mqttBrokerId}'
+        resource = f'/networks/{prepare(networkId)}/sensor/mqttBrokers/{prepare(mqttBrokerId)}'
 
         return self._session.get(metadata, resource)
         
@@ -276,9 +261,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'mqttBrokers'],
             'operation': 'updateNetworkSensorMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        mqttBrokerId = urllib.parse.quote(str(mqttBrokerId), safe='')
-        resource = f'/networks/{networkId}/sensor/mqttBrokers/{mqttBrokerId}'
+        resource = f'/networks/{prepare(networkId)}/sensor/mqttBrokers/{prepare(mqttBrokerId)}'
 
         body_params = ['enabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -299,8 +282,7 @@ class Sensor(object):
             'tags': ['sensor', 'configure', 'relationships'],
             'operation': 'getNetworkSensorRelationships'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/sensor/relationships'
+        resource = f'/networks/{prepare(networkId)}/sensor/relationships'
 
         return self._session.get(metadata, resource)
         
@@ -331,8 +313,7 @@ class Sensor(object):
             'tags': ['sensor', 'monitor', 'readings', 'history'],
             'operation': 'getOrganizationSensorReadingsHistory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sensor/readings/history'
+        resource = f'/organizations/{prepare(organizationId)}/sensor/readings/history'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 't0', 't1', 'timespan', 'networkIds', 'serials', 'metrics', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -369,8 +350,7 @@ class Sensor(object):
             'tags': ['sensor', 'monitor', 'readings', 'latest'],
             'operation': 'getOrganizationSensorReadingsLatest'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sensor/readings/latest'
+        resource = f'/organizations/{prepare(organizationId)}/sensor/readings/latest'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'metrics', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
