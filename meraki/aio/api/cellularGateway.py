@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncCellularGateway:
@@ -20,8 +21,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'lan'],
             'operation': 'getDeviceCellularGatewayLan'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellularGateway/lan'
+        resource = f'/devices/{prepare(serial)}/cellularGateway/lan'
 
         return self._session.get(metadata, resource)
         
@@ -43,8 +43,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'lan'],
             'operation': 'updateDeviceCellularGatewayLan'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellularGateway/lan'
+        resource = f'/devices/{prepare(serial)}/cellularGateway/lan'
 
         body_params = ['reservedIpRanges', 'fixedIpAssignments', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -65,8 +64,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'portForwardingRules'],
             'operation': 'getDeviceCellularGatewayPortForwardingRules'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellularGateway/portForwardingRules'
+        resource = f'/devices/{prepare(serial)}/cellularGateway/portForwardingRules'
 
         return self._session.get(metadata, resource)
         
@@ -87,8 +85,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'portForwardingRules'],
             'operation': 'updateDeviceCellularGatewayPortForwardingRules'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellularGateway/portForwardingRules'
+        resource = f'/devices/{prepare(serial)}/cellularGateway/portForwardingRules'
 
         body_params = ['rules', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -109,8 +106,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'connectivityMonitoringDestinations'],
             'operation': 'getNetworkCellularGatewayConnectivityMonitoringDestinations'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/connectivityMonitoringDestinations'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/connectivityMonitoringDestinations'
 
         return self._session.get(metadata, resource)
         
@@ -131,8 +127,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'connectivityMonitoringDestinations'],
             'operation': 'updateNetworkCellularGatewayConnectivityMonitoringDestinations'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/connectivityMonitoringDestinations'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/connectivityMonitoringDestinations'
 
         body_params = ['destinations', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -153,8 +148,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'dhcp'],
             'operation': 'getNetworkCellularGatewayDhcp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/dhcp'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/dhcp'
 
         return self._session.get(metadata, resource)
         
@@ -177,8 +171,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'dhcp'],
             'operation': 'updateNetworkCellularGatewayDhcp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/dhcp'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/dhcp'
 
         body_params = ['dhcpLeaseTime', 'dnsNameservers', 'dnsCustomNameservers', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -199,8 +192,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'subnetPool'],
             'operation': 'getNetworkCellularGatewaySubnetPool'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/subnetPool'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/subnetPool'
 
         return self._session.get(metadata, resource)
         
@@ -222,8 +214,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'subnetPool'],
             'operation': 'updateNetworkCellularGatewaySubnetPool'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/subnetPool'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/subnetPool'
 
         body_params = ['mask', 'cidr', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -244,8 +235,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'uplink'],
             'operation': 'getNetworkCellularGatewayUplink'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/uplink'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/uplink'
 
         return self._session.get(metadata, resource)
         
@@ -266,8 +256,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'configure', 'uplink'],
             'operation': 'updateNetworkCellularGatewayUplink'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/cellularGateway/uplink'
+        resource = f'/networks/{prepare(networkId)}/cellularGateway/uplink'
 
         body_params = ['bandwidthLimits', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -298,8 +287,7 @@ class AsyncCellularGateway:
             'tags': ['cellularGateway', 'monitor', 'uplink', 'statuses'],
             'operation': 'getOrganizationCellularGatewayUplinkStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/cellularGateway/uplink/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/cellularGateway/uplink/statuses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'iccids', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
