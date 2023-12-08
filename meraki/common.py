@@ -20,3 +20,10 @@ def check_python_version():
         )
 
         raise PythonVersionError(message)
+
+
+def prepare_url_item(string: str) -> str:
+    """
+    Prepares
+    """
+    return urllib.parse.quote(str(string), safe='')

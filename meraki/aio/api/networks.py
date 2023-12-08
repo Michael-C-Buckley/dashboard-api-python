@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncNetworks:
@@ -20,8 +21,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'getNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}'
+        resource = f'/networks/{prepare(networkId)}'
 
         return self._session.get(metadata, resource)
         
@@ -46,8 +46,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'updateNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}'
+        resource = f'/networks/{prepare(networkId)}'
 
         body_params = ['name', 'timeZone', 'tags', 'enrollmentString', 'notes', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -68,8 +67,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'deleteNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}'
+        resource = f'/networks/{prepare(networkId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -94,8 +92,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'alerts', 'history'],
             'operation': 'getNetworkAlertsHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/alerts/history'
+        resource = f'/networks/{prepare(networkId)}/alerts/history'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -116,8 +113,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'alerts', 'settings'],
             'operation': 'getNetworkAlertsSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/alerts/settings'
+        resource = f'/networks/{prepare(networkId)}/alerts/settings'
 
         return self._session.get(metadata, resource)
         
@@ -140,8 +136,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'alerts', 'settings'],
             'operation': 'updateNetworkAlertsSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/alerts/settings'
+        resource = f'/networks/{prepare(networkId)}/alerts/settings'
 
         body_params = ['defaultDestinations', 'alerts', 'muting', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -166,8 +161,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'bindNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/bind'
+        resource = f'/networks/{prepare(networkId)}/bind'
 
         body_params = ['configTemplateId', 'autoBind', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -198,8 +192,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'bluetoothClients'],
             'operation': 'getNetworkBluetoothClients'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/bluetoothClients'
+        resource = f'/networks/{prepare(networkId)}/bluetoothClients'
 
         query_params = ['t0', 'timespan', 'perPage', 'startingAfter', 'endingBefore', 'includeConnectivityHistory', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -219,17 +212,16 @@ class AsyncNetworks:
         - connectivityHistoryTimespan (integer): The timespan, in seconds, for the connectivityHistory data. By default 1 day, 86400, will be used.
         """
 
+        query_params = ['includeConnectivityHistory', 'connectivityHistoryTimespan']
+        params = {k:v for k,v in locals().items()}
         kwargs.update(locals())
 
         metadata = {
             'tags': ['networks', 'monitor', 'bluetoothClients'],
             'operation': 'getNetworkBluetoothClient'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        bluetoothClientId = urllib.parse.quote(str(bluetoothClientId), safe='')
-        resource = f'/networks/{networkId}/bluetoothClients/{bluetoothClientId}'
+        resource = f'/networks/{prepare(networkId)}/bluetoothClients/{prepare(bluetoothClientId)}'
 
-        query_params = ['includeConnectivityHistory', 'connectivityHistoryTimespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
 
         return self._session.get(metadata, resource, params)
@@ -268,8 +260,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients'],
             'operation': 'getNetworkClients'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients'
+        resource = f'/networks/{prepare(networkId)}/clients'
 
         query_params = ['t0', 'timespan', 'perPage', 'startingAfter', 'endingBefore', 'statuses', 'ip', 'ip6', 'ip6Local', 'mac', 'os', 'pskGroup', 'description', 'vlan', 'namedVlan', 'recentDeviceConnections', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -312,8 +303,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'applicationUsage'],
             'operation': 'getNetworkClientsApplicationUsage'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients/applicationUsage'
+        resource = f'/networks/{prepare(networkId)}/clients/applicationUsage'
 
         query_params = ['clients', 'ssidNumber', 'perPage', 'startingAfter', 'endingBefore', 't0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -344,8 +334,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'bandwidthUsageHistory'],
             'operation': 'getNetworkClientsBandwidthUsageHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients/bandwidthUsageHistory'
+        resource = f'/networks/{prepare(networkId)}/clients/bandwidthUsageHistory'
 
         query_params = ['t0', 't1', 'timespan', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -372,8 +361,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'overview'],
             'operation': 'getNetworkClientsOverview'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients/overview'
+        resource = f'/networks/{prepare(networkId)}/clients/overview'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -405,8 +393,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'clients'],
             'operation': 'provisionNetworkClients'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients/provision'
+        resource = f'/networks/{prepare(networkId)}/clients/provision'
 
         body_params = ['clients', 'devicePolicy', 'groupPolicyId', 'policiesBySecurityAppliance', 'policiesBySsid', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -443,8 +430,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'usageHistories'],
             'operation': 'getNetworkClientsUsageHistories'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/clients/usageHistories'
+        resource = f'/networks/{prepare(networkId)}/clients/usageHistories'
 
         query_params = ['clients', 'ssidNumber', 'perPage', 'startingAfter', 'endingBefore', 't0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -466,9 +452,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients'],
             'operation': 'getNetworkClient'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}'
 
         return self._session.get(metadata, resource)
         
@@ -487,9 +471,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'clients', 'policy'],
             'operation': 'getNetworkClientPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/policy'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/policy'
 
         return self._session.get(metadata, resource)
         
@@ -512,9 +494,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'clients', 'policy'],
             'operation': 'updateNetworkClientPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/policy'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/policy'
 
         body_params = ['devicePolicy', 'groupPolicyId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -536,9 +516,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'clients', 'splashAuthorizationStatus'],
             'operation': 'getNetworkClientSplashAuthorizationStatus'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/splashAuthorizationStatus'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/splashAuthorizationStatus'
 
         return self._session.get(metadata, resource)
         
@@ -560,9 +538,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'clients', 'splashAuthorizationStatus'],
             'operation': 'updateNetworkClientSplashAuthorizationStatus'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/splashAuthorizationStatus'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/splashAuthorizationStatus'
 
         body_params = ['ssids', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -591,9 +567,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'trafficHistory'],
             'operation': 'getNetworkClientTrafficHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/trafficHistory'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/trafficHistory'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -615,9 +589,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'clients', 'usageHistory'],
             'operation': 'getNetworkClientUsageHistory'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        clientId = urllib.parse.quote(str(clientId), safe='')
-        resource = f'/networks/{networkId}/clients/{clientId}/usageHistory'
+        resource = f'/networks/{prepare(networkId)}/clients/{prepare(clientId)}/usageHistory'
 
         return self._session.get(metadata, resource)
         
@@ -635,8 +607,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'devices'],
             'operation': 'getNetworkDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/devices'
+        resource = f'/networks/{prepare(networkId)}/devices'
 
         return self._session.get(metadata, resource)
         
@@ -657,8 +628,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'devices'],
             'operation': 'claimNetworkDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/devices/claim'
+        resource = f'/networks/{prepare(networkId)}/devices/claim'
 
         body_params = ['serials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -686,8 +656,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'devices', 'claim'],
             'operation': 'vmxNetworkDevicesClaim'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/devices/claim/vmx'
+        resource = f'/networks/{prepare(networkId)}/devices/claim/vmx'
 
         body_params = ['size', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -704,18 +673,13 @@ class AsyncNetworks:
         - networkId (string): Network ID
         - serial (string): The serial of a device
         """
-
-        kwargs = locals()
-
         metadata = {
             'tags': ['networks', 'configure', 'devices'],
             'operation': 'removeNetworkDevices'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/devices/remove'
+        resource = f'/networks/{prepare(networkId)}/devices/remove'
 
-        body_params = ['serial', ]
-        payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
+        payload = {'serial': serial}
 
         return self._session.post(metadata, resource, payload)
         
@@ -756,8 +720,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'events'],
             'operation': 'getNetworkEvents'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/events'
+        resource = f'/networks/{prepare(networkId)}/events'
 
         query_params = ['productType', 'includedEventTypes', 'excludedEventTypes', 'deviceMac', 'deviceSerial', 'deviceName', 'clientIp', 'clientMac', 'clientName', 'smDeviceMac', 'smDeviceName', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -784,8 +747,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'events', 'eventTypes'],
             'operation': 'getNetworkEventsEventTypes'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/events/eventTypes'
+        resource = f'/networks/{prepare(networkId)}/events/eventTypes'
 
         return self._session.get(metadata, resource)
         
@@ -803,8 +765,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades'],
             'operation': 'getNetworkFirmwareUpgrades'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades'
 
         return self._session.get(metadata, resource)
         
@@ -827,8 +788,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades'],
             'operation': 'updateNetworkFirmwareUpgrades'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades'
 
         body_params = ['upgradeWindow', 'timezone', 'products', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -859,8 +819,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'rollbacks'],
             'operation': 'createNetworkFirmwareUpgradesRollback'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/rollbacks'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/rollbacks'
 
         body_params = ['product', 'time', 'reasons', 'toVersion', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -881,8 +840,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'events'],
             'operation': 'getNetworkFirmwareUpgradesStagedEvents'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/events'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/events'
 
         return self._session.get(metadata, resource)
         
@@ -904,8 +862,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'events'],
             'operation': 'createNetworkFirmwareUpgradesStagedEvent'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/events'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/events'
 
         body_params = ['products', 'stages', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -929,8 +886,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'events'],
             'operation': 'updateNetworkFirmwareUpgradesStagedEvents'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/events'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/events'
 
         body_params = ['stages', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -951,8 +907,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'events'],
             'operation': 'deferNetworkFirmwareUpgradesStagedEvents'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/events/defer'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/events/defer'
 
         return self._session.post(metadata, resource)
         
@@ -974,8 +929,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'events'],
             'operation': 'rollbacksNetworkFirmwareUpgradesStagedEvents'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/events/rollbacks'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/events/rollbacks'
 
         body_params = ['stages', 'reasons', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -996,8 +950,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'groups'],
             'operation': 'getNetworkFirmwareUpgradesStagedGroups'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/groups'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/groups'
 
         return self._session.get(metadata, resource)
         
@@ -1021,8 +974,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'groups'],
             'operation': 'createNetworkFirmwareUpgradesStagedGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/groups'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/groups'
 
         body_params = ['name', 'description', 'isDefault', 'assignedDevices', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1044,9 +996,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'groups'],
             'operation': 'getNetworkFirmwareUpgradesStagedGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupId = urllib.parse.quote(str(groupId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/groups/{groupId}'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/groups/{prepare(groupId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1071,9 +1021,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'groups'],
             'operation': 'updateNetworkFirmwareUpgradesStagedGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupId = urllib.parse.quote(str(groupId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/groups/{groupId}'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/groups/{prepare(groupId)}'
 
         body_params = ['name', 'description', 'isDefault', 'assignedDevices', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1095,9 +1043,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'groups'],
             'operation': 'deleteNetworkFirmwareUpgradesStagedGroup'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupId = urllib.parse.quote(str(groupId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/groups/{groupId}'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/groups/{prepare(groupId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1115,8 +1061,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'stages'],
             'operation': 'getNetworkFirmwareUpgradesStagedStages'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/stages'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/stages'
 
         return self._session.get(metadata, resource)
         
@@ -1137,8 +1082,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'firmwareUpgrades', 'staged', 'stages'],
             'operation': 'updateNetworkFirmwareUpgradesStagedStages'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/firmwareUpgrades/staged/stages'
+        resource = f'/networks/{prepare(networkId)}/firmwareUpgrades/staged/stages'
 
         body_params = ['_json', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1159,8 +1103,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'floorPlans'],
             'operation': 'getNetworkFloorPlans'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/floorPlans'
+        resource = f'/networks/{prepare(networkId)}/floorPlans'
 
         return self._session.get(metadata, resource)
         
@@ -1187,8 +1130,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'floorPlans'],
             'operation': 'createNetworkFloorPlan'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/floorPlans'
+        resource = f'/networks/{prepare(networkId)}/floorPlans'
 
         body_params = ['name', 'center', 'bottomLeftCorner', 'bottomRightCorner', 'topLeftCorner', 'topRightCorner', 'imageContents', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1210,9 +1152,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'floorPlans'],
             'operation': 'getNetworkFloorPlan'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        floorPlanId = urllib.parse.quote(str(floorPlanId), safe='')
-        resource = f'/networks/{networkId}/floorPlans/{floorPlanId}'
+        resource = f'/networks/{prepare(networkId)}/floorPlans/{prepare(floorPlanId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1240,9 +1180,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'floorPlans'],
             'operation': 'updateNetworkFloorPlan'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        floorPlanId = urllib.parse.quote(str(floorPlanId), safe='')
-        resource = f'/networks/{networkId}/floorPlans/{floorPlanId}'
+        resource = f'/networks/{prepare(networkId)}/floorPlans/{prepare(floorPlanId)}'
 
         body_params = ['name', 'center', 'bottomLeftCorner', 'bottomRightCorner', 'topLeftCorner', 'topRightCorner', 'imageContents', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1264,9 +1202,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'floorPlans'],
             'operation': 'deleteNetworkFloorPlan'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        floorPlanId = urllib.parse.quote(str(floorPlanId), safe='')
-        resource = f'/networks/{networkId}/floorPlans/{floorPlanId}'
+        resource = f'/networks/{prepare(networkId)}/floorPlans/{prepare(floorPlanId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1284,8 +1220,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'groupPolicies'],
             'operation': 'getNetworkGroupPolicies'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/groupPolicies'
+        resource = f'/networks/{prepare(networkId)}/groupPolicies'
 
         return self._session.get(metadata, resource)
         
@@ -1320,8 +1255,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'groupPolicies'],
             'operation': 'createNetworkGroupPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/groupPolicies'
+        resource = f'/networks/{prepare(networkId)}/groupPolicies'
 
         body_params = ['name', 'scheduling', 'bandwidth', 'firewallAndTrafficShaping', 'contentFiltering', 'splashAuthSettings', 'vlanTagging', 'bonjourForwarding', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1343,9 +1277,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'groupPolicies'],
             'operation': 'getNetworkGroupPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupPolicyId = urllib.parse.quote(str(groupPolicyId), safe='')
-        resource = f'/networks/{networkId}/groupPolicies/{groupPolicyId}'
+        resource = f'/networks/{prepare(networkId)}/groupPolicies/{prepare(groupPolicyId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1381,9 +1313,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'groupPolicies'],
             'operation': 'updateNetworkGroupPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupPolicyId = urllib.parse.quote(str(groupPolicyId), safe='')
-        resource = f'/networks/{networkId}/groupPolicies/{groupPolicyId}'
+        resource = f'/networks/{prepare(networkId)}/groupPolicies/{prepare(groupPolicyId)}'
 
         body_params = ['name', 'scheduling', 'bandwidth', 'firewallAndTrafficShaping', 'contentFiltering', 'splashAuthSettings', 'vlanTagging', 'bonjourForwarding', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1405,9 +1335,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'groupPolicies'],
             'operation': 'deleteNetworkGroupPolicy'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        groupPolicyId = urllib.parse.quote(str(groupPolicyId), safe='')
-        resource = f'/networks/{networkId}/groupPolicies/{groupPolicyId}'
+        resource = f'/networks/{prepare(networkId)}/groupPolicies/{prepare(groupPolicyId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1425,8 +1353,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'health', 'alerts'],
             'operation': 'getNetworkHealthAlerts'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/health/alerts'
+        resource = f'/networks/{prepare(networkId)}/health/alerts'
 
         return self._session.get(metadata, resource)
         
@@ -1444,8 +1371,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'merakiAuthUsers'],
             'operation': 'getNetworkMerakiAuthUsers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/merakiAuthUsers'
+        resource = f'/networks/{prepare(networkId)}/merakiAuthUsers'
 
         return self._session.get(metadata, resource)
         
@@ -1476,8 +1402,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'merakiAuthUsers'],
             'operation': 'createNetworkMerakiAuthUser'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/merakiAuthUsers'
+        resource = f'/networks/{prepare(networkId)}/merakiAuthUsers'
 
         body_params = ['email', 'name', 'password', 'accountType', 'emailPasswordToUser', 'isAdmin', 'authorizations', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1499,9 +1424,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'merakiAuthUsers'],
             'operation': 'getNetworkMerakiAuthUser'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        merakiAuthUserId = urllib.parse.quote(str(merakiAuthUserId), safe='')
-        resource = f'/networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}'
+        resource = f'/networks/{prepare(networkId)}/merakiAuthUsers/{prepare(merakiAuthUserId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1523,9 +1446,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'merakiAuthUsers'],
             'operation': 'deleteNetworkMerakiAuthUser'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        merakiAuthUserId = urllib.parse.quote(str(merakiAuthUserId), safe='')
-        resource = f'/networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}'
+        resource = f'/networks/{prepare(networkId)}/merakiAuthUsers/{prepare(merakiAuthUserId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1550,9 +1471,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'merakiAuthUsers'],
             'operation': 'updateNetworkMerakiAuthUser'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        merakiAuthUserId = urllib.parse.quote(str(merakiAuthUserId), safe='')
-        resource = f'/networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}'
+        resource = f'/networks/{prepare(networkId)}/merakiAuthUsers/{prepare(merakiAuthUserId)}'
 
         body_params = ['name', 'password', 'emailPasswordToUser', 'authorizations', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1573,8 +1492,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'mqttBrokers'],
             'operation': 'getNetworkMqttBrokers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/mqttBrokers'
+        resource = f'/networks/{prepare(networkId)}/mqttBrokers'
 
         return self._session.get(metadata, resource)
         
@@ -1599,8 +1517,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'mqttBrokers'],
             'operation': 'createNetworkMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/mqttBrokers'
+        resource = f'/networks/{prepare(networkId)}/mqttBrokers'
 
         body_params = ['name', 'host', 'port', 'security', 'authentication', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1622,9 +1539,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'mqttBrokers'],
             'operation': 'getNetworkMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        mqttBrokerId = urllib.parse.quote(str(mqttBrokerId), safe='')
-        resource = f'/networks/{networkId}/mqttBrokers/{mqttBrokerId}'
+        resource = f'/networks/{prepare(networkId)}/mqttBrokers/{prepare(mqttBrokerId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1650,9 +1565,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'mqttBrokers'],
             'operation': 'updateNetworkMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        mqttBrokerId = urllib.parse.quote(str(mqttBrokerId), safe='')
-        resource = f'/networks/{networkId}/mqttBrokers/{mqttBrokerId}'
+        resource = f'/networks/{prepare(networkId)}/mqttBrokers/{prepare(mqttBrokerId)}'
 
         body_params = ['name', 'host', 'port', 'security', 'authentication', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1674,9 +1587,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'mqttBrokers'],
             'operation': 'deleteNetworkMqttBroker'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        mqttBrokerId = urllib.parse.quote(str(mqttBrokerId), safe='')
-        resource = f'/networks/{networkId}/mqttBrokers/{mqttBrokerId}'
+        resource = f'/networks/{prepare(networkId)}/mqttBrokers/{prepare(mqttBrokerId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1694,8 +1605,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'netflow'],
             'operation': 'getNetworkNetflow'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/netflow'
+        resource = f'/networks/{prepare(networkId)}/netflow'
 
         return self._session.get(metadata, resource)
         
@@ -1720,8 +1630,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'netflow'],
             'operation': 'updateNetworkNetflow'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/netflow'
+        resource = f'/networks/{prepare(networkId)}/netflow'
 
         body_params = ['reportingEnabled', 'collectorIp', 'collectorPort', 'etaEnabled', 'etaDstPort', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1753,8 +1662,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'networkHealth', 'channelUtilization'],
             'operation': 'getNetworkNetworkHealthChannelUtilization'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/networkHealth/channelUtilization'
+        resource = f'/networks/{prepare(networkId)}/networkHealth/channelUtilization'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1783,8 +1691,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'piiKeys'],
             'operation': 'getNetworkPiiPiiKeys'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/pii/piiKeys'
+        resource = f'/networks/{prepare(networkId)}/pii/piiKeys'
 
         query_params = ['username', 'email', 'mac', 'serial', 'imei', 'bluetoothMac', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1805,8 +1712,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'requests'],
             'operation': 'getNetworkPiiRequests'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/pii/requests'
+        resource = f'/networks/{prepare(networkId)}/pii/requests'
 
         return self._session.get(metadata, resource)
         
@@ -1837,8 +1743,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'requests'],
             'operation': 'createNetworkPiiRequest'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/pii/requests'
+        resource = f'/networks/{prepare(networkId)}/pii/requests'
 
         body_params = ['type', 'datasets', 'username', 'email', 'mac', 'smDeviceId', 'smUserId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1860,9 +1765,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'requests'],
             'operation': 'getNetworkPiiRequest'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        requestId = urllib.parse.quote(str(requestId), safe='')
-        resource = f'/networks/{networkId}/pii/requests/{requestId}'
+        resource = f'/networks/{prepare(networkId)}/pii/requests/{prepare(requestId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1881,9 +1784,8 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'requests'],
             'operation': 'deleteNetworkPiiRequest'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
         requestId = urllib.parse.quote(str(requestId), safe='')
-        resource = f'/networks/{networkId}/pii/requests/{requestId}'
+        resource = f'/networks/{prepare(networkId)}/pii/requests/{prepare(requestId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1909,8 +1811,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'smDevicesForKey'],
             'operation': 'getNetworkPiiSmDevicesForKey'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/pii/smDevicesForKey'
+        resource = f'/networks/{prepare(networkId)}/pii/smDevicesForKey'
 
         query_params = ['username', 'email', 'mac', 'serial', 'imei', 'bluetoothMac', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1939,8 +1840,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'smOwnersForKey'],
             'operation': 'getNetworkPiiSmOwnersForKey'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/pii/smOwnersForKey'
+        resource = f'/networks/{prepare(networkId)}/pii/smOwnersForKey'
 
         query_params = ['username', 'email', 'mac', 'serial', 'imei', 'bluetoothMac', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1970,8 +1870,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'policies', 'byClient'],
             'operation': 'getNetworkPoliciesByClient'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/policies/byClient'
+        resource = f'/networks/{prepare(networkId)}/policies/byClient'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 't0', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1992,8 +1891,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'settings'],
             'operation': 'getNetworkSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/settings'
+        resource = f'/networks/{prepare(networkId)}/settings'
 
         return self._session.get(metadata, resource)
         
@@ -2018,8 +1916,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'settings'],
             'operation': 'updateNetworkSettings'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/settings'
+        resource = f'/networks/{prepare(networkId)}/settings'
 
         body_params = ['localStatusPageEnabled', 'remoteStatusPageEnabled', 'localStatusPage', 'securePort', 'namedVlans', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2040,8 +1937,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'snmp'],
             'operation': 'getNetworkSnmp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/snmp'
+        resource = f'/networks/{prepare(networkId)}/snmp'
 
         return self._session.get(metadata, resource)
         
@@ -2068,8 +1964,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'snmp'],
             'operation': 'updateNetworkSnmp'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/snmp'
+        resource = f'/networks/{prepare(networkId)}/snmp'
 
         body_params = ['access', 'communityString', 'users', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2099,8 +1994,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'splashLoginAttempts'],
             'operation': 'getNetworkSplashLoginAttempts'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/splashLoginAttempts'
+        resource = f'/networks/{prepare(networkId)}/splashLoginAttempts'
 
         query_params = ['ssidNumber', 'loginIdentifier', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2121,8 +2015,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'splitNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/split'
+        resource = f'/networks/{prepare(networkId)}/split'
 
         return self._session.post(metadata, resource)
         
@@ -2140,8 +2033,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'syslogServers'],
             'operation': 'getNetworkSyslogServers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/syslogServers'
+        resource = f'/networks/{prepare(networkId)}/syslogServers'
 
         return self._session.get(metadata, resource)
         
@@ -2162,8 +2054,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'syslogServers'],
             'operation': 'updateNetworkSyslogServers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/syslogServers'
+        resource = f'/networks/{prepare(networkId)}/syslogServers'
 
         body_params = ['servers', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2184,8 +2075,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'topology', 'linkLayer'],
             'operation': 'getNetworkTopologyLinkLayer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/topology/linkLayer'
+        resource = f'/networks/{prepare(networkId)}/topology/linkLayer'
 
         return self._session.get(metadata, resource)
         
@@ -2212,8 +2102,7 @@ class AsyncNetworks:
             'tags': ['networks', 'monitor', 'traffic'],
             'operation': 'getNetworkTraffic'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/traffic'
+        resource = f'/networks/{prepare(networkId)}/traffic'
 
         query_params = ['t0', 'timespan', 'deviceType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2234,8 +2123,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'trafficAnalysis'],
             'operation': 'getNetworkTrafficAnalysis'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/trafficAnalysis'
+        resource = f'/networks/{prepare(networkId)}/trafficAnalysis'
 
         return self._session.get(metadata, resource)
         
@@ -2263,8 +2151,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'trafficAnalysis'],
             'operation': 'updateNetworkTrafficAnalysis'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/trafficAnalysis'
+        resource = f'/networks/{prepare(networkId)}/trafficAnalysis'
 
         body_params = ['mode', 'customPieChartItems', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2285,8 +2172,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'trafficShaping', 'applicationCategories'],
             'operation': 'getNetworkTrafficShapingApplicationCategories'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/trafficShaping/applicationCategories'
+        resource = f'/networks/{prepare(networkId)}/trafficShaping/applicationCategories'
 
         return self._session.get(metadata, resource)
         
@@ -2304,8 +2190,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'trafficShaping', 'dscpTaggingOptions'],
             'operation': 'getNetworkTrafficShapingDscpTaggingOptions'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/trafficShaping/dscpTaggingOptions'
+        resource = f'/networks/{prepare(networkId)}/trafficShaping/dscpTaggingOptions'
 
         return self._session.get(metadata, resource)
         
@@ -2326,8 +2211,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure'],
             'operation': 'unbindNetwork'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/unbind'
+        resource = f'/networks/{prepare(networkId)}/unbind'
 
         body_params = ['retainConfigs', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2348,8 +2232,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'getNetworkVlanProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -2373,8 +2256,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'createNetworkVlanProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles'
 
         body_params = ['name', 'vlanNames', 'vlanGroups', 'iname', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2405,8 +2287,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles', 'assignments', 'byDevice'],
             'operation': 'getNetworkVlanProfilesAssignmentsByDevice'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles/assignments/byDevice'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/assignments/byDevice'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'serials', 'productTypes', 'stackIds', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2438,8 +2319,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles', 'assignments'],
             'operation': 'reassignNetworkVlanProfilesAssignments'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles/assignments/reassign'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/assignments/reassign'
 
         body_params = ['vlanProfile', 'serials', 'stackIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2461,9 +2341,8 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'getNetworkVlanProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
         iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
 
         return self._session.get(metadata, resource)
         
@@ -2487,9 +2366,8 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'updateNetworkVlanProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
         iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
 
         body_params = ['name', 'vlanNames', 'vlanGroups', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2511,9 +2389,8 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'deleteNetworkVlanProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
         iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{networkId}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
 
         return self._session.delete(metadata, resource)
         
@@ -2531,8 +2408,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'httpServers'],
             'operation': 'getNetworkWebhooksHttpServers'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/webhooks/httpServers'
+        resource = f'/networks/{prepare(networkId)}/webhooks/httpServers'
 
         return self._session.get(metadata, resource)
         
@@ -2556,8 +2432,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'httpServers'],
             'operation': 'createNetworkWebhooksHttpServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/webhooks/httpServers'
+        resource = f'/networks/{prepare(networkId)}/webhooks/httpServers'
 
         body_params = ['name', 'url', 'sharedSecret', 'payloadTemplate', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2579,9 +2454,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'httpServers'],
             'operation': 'getNetworkWebhooksHttpServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        httpServerId = urllib.parse.quote(str(httpServerId), safe='')
-        resource = f'/networks/{networkId}/webhooks/httpServers/{httpServerId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/httpServers/{prepare(httpServerId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2605,9 +2478,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'httpServers'],
             'operation': 'updateNetworkWebhooksHttpServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        httpServerId = urllib.parse.quote(str(httpServerId), safe='')
-        resource = f'/networks/{networkId}/webhooks/httpServers/{httpServerId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/httpServers/{prepare(httpServerId)}'
 
         body_params = ['name', 'sharedSecret', 'payloadTemplate', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2629,9 +2500,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'httpServers'],
             'operation': 'deleteNetworkWebhooksHttpServer'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        httpServerId = urllib.parse.quote(str(httpServerId), safe='')
-        resource = f'/networks/{networkId}/webhooks/httpServers/{httpServerId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/httpServers/{prepare(httpServerId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2649,8 +2518,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'payloadTemplates'],
             'operation': 'getNetworkWebhooksPayloadTemplates'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/webhooks/payloadTemplates'
+        resource = f'/networks/{prepare(networkId)}/webhooks/payloadTemplates'
 
         return self._session.get(metadata, resource)
         
@@ -2675,8 +2543,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'payloadTemplates'],
             'operation': 'createNetworkWebhooksPayloadTemplate'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/webhooks/payloadTemplates'
+        resource = f'/networks/{prepare(networkId)}/webhooks/payloadTemplates'
 
         body_params = ['name', 'body', 'headers', 'bodyFile', 'headersFile', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2698,9 +2565,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'payloadTemplates'],
             'operation': 'getNetworkWebhooksPayloadTemplate'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        payloadTemplateId = urllib.parse.quote(str(payloadTemplateId), safe='')
-        resource = f'/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/payloadTemplates/{prepare(payloadTemplateId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2719,9 +2584,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'payloadTemplates'],
             'operation': 'deleteNetworkWebhooksPayloadTemplate'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        payloadTemplateId = urllib.parse.quote(str(payloadTemplateId), safe='')
-        resource = f'/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/payloadTemplates/{prepare(payloadTemplateId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2747,9 +2610,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'payloadTemplates'],
             'operation': 'updateNetworkWebhooksPayloadTemplate'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        payloadTemplateId = urllib.parse.quote(str(payloadTemplateId), safe='')
-        resource = f'/networks/{networkId}/webhooks/payloadTemplates/{payloadTemplateId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/payloadTemplates/{prepare(payloadTemplateId)}'
 
         body_params = ['name', 'body', 'headers', 'bodyFile', 'headersFile', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2777,8 +2638,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'webhookTests'],
             'operation': 'createNetworkWebhooksWebhookTest'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/webhooks/webhookTests'
+        resource = f'/networks/{prepare(networkId)}/webhooks/webhookTests'
 
         body_params = ['url', 'sharedSecret', 'payloadTemplateId', 'payloadTemplateName', 'alertTypeId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2800,9 +2660,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'webhooks', 'webhookTests'],
             'operation': 'getNetworkWebhooksWebhookTest'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        webhookTestId = urllib.parse.quote(str(webhookTestId), safe='')
-        resource = f'/networks/{networkId}/webhooks/webhookTests/{webhookTestId}'
+        resource = f'/networks/{prepare(networkId)}/webhooks/webhookTests/{prepare(webhookTestId)}'
 
         return self._session.get(metadata, resource)
         
