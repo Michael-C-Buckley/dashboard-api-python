@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncOrganizations:
@@ -61,8 +62,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure'],
             'operation': 'getOrganization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}'
+        resource = f'/organizations/{prepare(organizationId)}'
 
         return self._session.get(metadata, resource)
         
@@ -85,8 +85,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure'],
             'operation': 'updateOrganization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}'
+        resource = f'/organizations/{prepare(organizationId)}'
 
         body_params = ['name', 'management', 'api', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -107,8 +106,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure'],
             'operation': 'deleteOrganization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}'
+        resource = f'/organizations/{prepare(organizationId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -132,8 +130,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'actionBatches'],
             'operation': 'createOrganizationActionBatch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/actionBatches'
+        resource = f'/organizations/{prepare(organizationId)}/actionBatches'
 
         body_params = ['confirmed', 'synchronous', 'actions', 'callback', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -161,8 +158,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'actionBatches'],
             'operation': 'getOrganizationActionBatches'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/actionBatches'
+        resource = f'/organizations/{prepare(organizationId)}/actionBatches'
 
         query_params = ['status', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -184,9 +180,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'actionBatches'],
             'operation': 'getOrganizationActionBatch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        actionBatchId = urllib.parse.quote(str(actionBatchId), safe='')
-        resource = f'/organizations/{organizationId}/actionBatches/{actionBatchId}'
+        resource = f'/organizations/{prepare(organizationId)}/actionBatches/{prepare(actionBatchId)}'
 
         return self._session.get(metadata, resource)
         
@@ -205,9 +199,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'actionBatches'],
             'operation': 'deleteOrganizationActionBatch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        actionBatchId = urllib.parse.quote(str(actionBatchId), safe='')
-        resource = f'/organizations/{organizationId}/actionBatches/{actionBatchId}'
+        resource = f'/organizations/{prepare(organizationId)}/actionBatches/{prepare(actionBatchId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -230,9 +222,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'actionBatches'],
             'operation': 'updateOrganizationActionBatch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        actionBatchId = urllib.parse.quote(str(actionBatchId), safe='')
-        resource = f'/organizations/{organizationId}/actionBatches/{actionBatchId}'
+        resource = f'/organizations/{prepare(organizationId)}/actionBatches/{prepare(actionBatchId)}'
 
         body_params = ['confirmed', 'synchronous', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -253,8 +243,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'acls'],
             'operation': 'getOrganizationAdaptivePolicyAcls'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/acls'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/acls'
 
         return self._session.get(metadata, resource)
         
@@ -282,8 +271,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'acls'],
             'operation': 'createOrganizationAdaptivePolicyAcl'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/acls'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/acls'
 
         body_params = ['name', 'description', 'rules', 'ipVersion', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -305,9 +293,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'acls'],
             'operation': 'getOrganizationAdaptivePolicyAcl'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        aclId = urllib.parse.quote(str(aclId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/acls/{aclId}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/acls/{prepare(aclId)}'
 
         return self._session.get(metadata, resource)
         
@@ -336,9 +322,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'acls'],
             'operation': 'updateOrganizationAdaptivePolicyAcl'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        aclId = urllib.parse.quote(str(aclId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/acls/{aclId}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/acls/{prepare(aclId)}'
 
         body_params = ['name', 'description', 'rules', 'ipVersion', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -360,9 +344,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'acls'],
             'operation': 'deleteOrganizationAdaptivePolicyAcl'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        aclId = urllib.parse.quote(str(aclId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/acls/{aclId}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/acls/{prepare(aclId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -380,8 +362,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'groups'],
             'operation': 'getOrganizationAdaptivePolicyGroups'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/groups'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/groups'
 
         return self._session.get(metadata, resource)
         
@@ -405,8 +386,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'groups'],
             'operation': 'createOrganizationAdaptivePolicyGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/groups'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/groups'
 
         body_params = ['name', 'sgt', 'description', 'policyObjects', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -428,9 +408,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'groups'],
             'operation': 'getOrganizationAdaptivePolicyGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/groups/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/groups/{prepare(id)}'
 
         return self._session.get(metadata, resource)
         
@@ -455,9 +433,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'groups'],
             'operation': 'updateOrganizationAdaptivePolicyGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/groups/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/groups/{prepare(id)}'
 
         body_params = ['name', 'sgt', 'description', 'policyObjects', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -479,9 +455,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'groups'],
             'operation': 'deleteOrganizationAdaptivePolicyGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/groups/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/groups/{prepare(id)}'
 
         return self._session.delete(metadata, resource)
         
@@ -499,8 +473,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'adaptivePolicy', 'overview'],
             'operation': 'getOrganizationAdaptivePolicyOverview'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/overview'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/overview'
 
         return self._session.get(metadata, resource)
         
@@ -518,8 +491,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'policies'],
             'operation': 'getOrganizationAdaptivePolicyPolicies'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/policies'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/policies'
 
         return self._session.get(metadata, resource)
         
@@ -547,8 +519,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'policies'],
             'operation': 'createOrganizationAdaptivePolicyPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/policies'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/policies'
 
         body_params = ['sourceGroup', 'destinationGroup', 'acls', 'lastEntryRule', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -570,9 +541,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'policies'],
             'operation': 'getOrganizationAdaptivePolicyPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/policies/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/policies/{prepare(id)}'
 
         return self._session.get(metadata, resource)
         
@@ -601,9 +570,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'policies'],
             'operation': 'updateOrganizationAdaptivePolicyPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/policies/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/policies/{prepare(id)}'
 
         body_params = ['sourceGroup', 'destinationGroup', 'acls', 'lastEntryRule', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -625,9 +592,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'policies'],
             'operation': 'deleteOrganizationAdaptivePolicyPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/policies/{id}'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/policies/{prepare(id)}'
 
         return self._session.delete(metadata, resource)
         
@@ -645,8 +610,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'settings'],
             'operation': 'getOrganizationAdaptivePolicySettings'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/settings'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/settings'
 
         return self._session.get(metadata, resource)
         
@@ -667,8 +631,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'adaptivePolicy', 'settings'],
             'operation': 'updateOrganizationAdaptivePolicySettings'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/adaptivePolicy/settings'
+        resource = f'/organizations/{prepare(organizationId)}/adaptivePolicy/settings'
 
         body_params = ['enabledNetworks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -689,8 +652,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'admins'],
             'operation': 'getOrganizationAdmins'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/admins'
+        resource = f'/organizations/{prepare(organizationId)}/admins'
 
         return self._session.get(metadata, resource)
         
@@ -723,8 +685,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'admins'],
             'operation': 'createOrganizationAdmin'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/admins'
+        resource = f'/organizations/{prepare(organizationId)}/admins'
 
         body_params = ['email', 'name', 'orgAccess', 'tags', 'networks', 'authenticationMethod', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -756,9 +717,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'admins'],
             'operation': 'updateOrganizationAdmin'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        adminId = urllib.parse.quote(str(adminId), safe='')
-        resource = f'/organizations/{organizationId}/admins/{adminId}'
+        resource = f'/organizations/{prepare(organizationId)}/admins/{prepare(adminId)}'
 
         body_params = ['name', 'orgAccess', 'tags', 'networks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -780,9 +739,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'admins'],
             'operation': 'deleteOrganizationAdmin'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        adminId = urllib.parse.quote(str(adminId), safe='')
-        resource = f'/organizations/{organizationId}/admins/{adminId}'
+        resource = f'/organizations/{prepare(organizationId)}/admins/{prepare(adminId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -800,8 +757,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'alerts', 'profiles'],
             'operation': 'getOrganizationAlertsProfiles'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/alerts/profiles'
+        resource = f'/organizations/{prepare(organizationId)}/alerts/profiles'
 
         return self._session.get(metadata, resource)
         
@@ -830,8 +786,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'alerts', 'profiles'],
             'operation': 'createOrganizationAlertsProfile'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/alerts/profiles'
+        resource = f'/organizations/{prepare(organizationId)}/alerts/profiles'
 
         body_params = ['type', 'alertCondition', 'recipients', 'networkTags', 'description', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -865,9 +820,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'alerts', 'profiles'],
             'operation': 'updateOrganizationAlertsProfile'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        alertConfigId = urllib.parse.quote(str(alertConfigId), safe='')
-        resource = f'/organizations/{organizationId}/alerts/profiles/{alertConfigId}'
+        resource = f'/organizations/{prepare(organizationId)}/alerts/profiles/{prepare(alertConfigId)}'
 
         body_params = ['enabled', 'type', 'alertCondition', 'recipients', 'networkTags', 'description', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -889,9 +842,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'alerts', 'profiles'],
             'operation': 'deleteOrganizationAlertsProfile'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        alertConfigId = urllib.parse.quote(str(alertConfigId), safe='')
-        resource = f'/organizations/{organizationId}/alerts/profiles/{alertConfigId}'
+        resource = f'/organizations/{prepare(organizationId)}/alerts/profiles/{prepare(alertConfigId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -934,8 +885,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'apiRequests'],
             'operation': 'getOrganizationApiRequests'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/apiRequests'
+        resource = f'/organizations/{prepare(organizationId)}/apiRequests'
 
         query_params = ['t0', 't1', 'timespan', 'perPage', 'startingAfter', 'endingBefore', 'adminId', 'path', 'method', 'responseCode', 'sourceIp', 'userAgent', 'version', 'operationIds', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -967,8 +917,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'apiRequests', 'overview'],
             'operation': 'getOrganizationApiRequestsOverview'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/apiRequests/overview'
+        resource = f'/organizations/{prepare(organizationId)}/apiRequests/overview'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1004,8 +953,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'apiRequests', 'overview', 'responseCodes', 'byInterval'],
             'operation': 'getOrganizationApiRequestsOverviewResponseCodesByInterval'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/apiRequests/overview/responseCodes/byInterval'
+        resource = f'/organizations/{prepare(organizationId)}/apiRequests/overview/responseCodes/byInterval'
 
         query_params = ['t0', 't1', 'timespan', 'interval', 'version', 'operationIds', 'sourceIps', 'adminIds', 'userAgent', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1032,8 +980,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies'],
             'operation': 'getOrganizationBrandingPolicies'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies'
 
         return self._session.get(metadata, resource)
         
@@ -1062,8 +1009,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies'],
             'operation': 'createOrganizationBrandingPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies'
 
         body_params = ['name', 'enabled', 'adminSettings', 'helpSettings', 'customLogo', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1084,8 +1030,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies', 'priorities'],
             'operation': 'getOrganizationBrandingPoliciesPriorities'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies/priorities'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies/priorities'
 
         return self._session.get(metadata, resource)
         
@@ -1107,8 +1052,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies', 'priorities'],
             'operation': 'updateOrganizationBrandingPoliciesPriorities'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies/priorities'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies/priorities'
 
         body_params = ['brandingPolicyIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1130,9 +1074,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies'],
             'operation': 'getOrganizationBrandingPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        brandingPolicyId = urllib.parse.quote(str(brandingPolicyId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies/{brandingPolicyId}'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies/{prepare(brandingPolicyId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1162,9 +1104,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies'],
             'operation': 'updateOrganizationBrandingPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        brandingPolicyId = urllib.parse.quote(str(brandingPolicyId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies/{brandingPolicyId}'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies/{prepare(brandingPolicyId)}'
 
         body_params = ['name', 'enabled', 'adminSettings', 'helpSettings', 'customLogo', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1186,9 +1126,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'brandingPolicies'],
             'operation': 'deleteOrganizationBrandingPolicy'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        brandingPolicyId = urllib.parse.quote(str(brandingPolicyId), safe='')
-        resource = f'/organizations/{organizationId}/brandingPolicies/{brandingPolicyId}'
+        resource = f'/organizations/{prepare(organizationId)}/brandingPolicies/{prepare(brandingPolicyId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1211,8 +1149,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure'],
             'operation': 'claimIntoOrganization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/claim'
+        resource = f'/organizations/{prepare(organizationId)}/claim'
 
         body_params = ['orders', 'serials', 'licenses', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1238,8 +1175,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'clients', 'bandwidthUsageHistory'],
             'operation': 'getOrganizationClientsBandwidthUsageHistory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/clients/bandwidthUsageHistory'
+        resource = f'/organizations/{prepare(organizationId)}/clients/bandwidthUsageHistory'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1265,8 +1201,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'clients', 'overview'],
             'operation': 'getOrganizationClientsOverview'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/clients/overview'
+        resource = f'/organizations/{prepare(organizationId)}/clients/overview'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1295,8 +1230,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'clients', 'search'],
             'operation': 'getOrganizationClientsSearch'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/clients/search'
+        resource = f'/organizations/{prepare(organizationId)}/clients/search'
 
         query_params = ['mac', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1320,8 +1254,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure'],
             'operation': 'cloneOrganization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/clone'
+        resource = f'/organizations/{prepare(organizationId)}/clone'
 
         body_params = ['name', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1342,8 +1275,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'configTemplates'],
             'operation': 'getOrganizationConfigTemplates'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates'
 
         return self._session.get(metadata, resource)
         
@@ -1366,8 +1298,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'configTemplates'],
             'operation': 'createOrganizationConfigTemplate'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates'
 
         body_params = ['name', 'timeZone', 'copyFromNetworkId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1393,9 +1324,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'configTemplates'],
             'operation': 'updateOrganizationConfigTemplate'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}'
 
         body_params = ['name', 'timeZone', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1417,9 +1346,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'configTemplates'],
             'operation': 'deleteOrganizationConfigTemplate'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1438,9 +1365,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'configTemplates'],
             'operation': 'getOrganizationConfigTemplate'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        configTemplateId = urllib.parse.quote(str(configTemplateId), safe='')
-        resource = f'/organizations/{organizationId}/configTemplates/{configTemplateId}'
+        resource = f'/organizations/{prepare(organizationId)}/configTemplates/{prepare(configTemplateId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1470,8 +1395,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'configurationChanges'],
             'operation': 'getOrganizationConfigurationChanges'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/configurationChanges'
+        resource = f'/organizations/{prepare(organizationId)}/configurationChanges'
 
         query_params = ['t0', 't1', 'timespan', 'perPage', 'startingAfter', 'endingBefore', 'networkId', 'adminId', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1517,8 +1441,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'devices'],
             'operation': 'getOrganizationDevices'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices'
+        resource = f'/organizations/{prepare(organizationId)}/devices'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'configurationUpdatedAfter', 'networkIds', 'productTypes', 'tags', 'tagsFilterType', 'name', 'mac', 'serial', 'model', 'macs', 'serials', 'sensorMetrics', 'sensorAlertProfileIds', 'models', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1561,8 +1484,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'availabilities'],
             'operation': 'getOrganizationDevicesAvailabilities'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/availabilities'
+        resource = f'/organizations/{prepare(organizationId)}/devices/availabilities'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'productTypes', 'serials', 'tags', 'tagsFilterType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1603,8 +1525,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'availabilities', 'changeHistory'],
             'operation': 'getOrganizationDevicesAvailabilitiesChangeHistory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/availabilities/changeHistory'
+        resource = f'/organizations/{prepare(organizationId)}/devices/availabilities/changeHistory'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 't0', 't1', 'timespan', 'serials', 'productTypes', 'networkIds', 'statuses', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1647,8 +1568,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'powerModules', 'statuses', 'byDevice'],
             'operation': 'getOrganizationDevicesPowerModulesStatusesByDevice'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/powerModules/statuses/byDevice'
+        resource = f'/organizations/{prepare(organizationId)}/devices/powerModules/statuses/byDevice'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'productTypes', 'serials', 'tags', 'tagsFilterType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1695,8 +1615,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'provisioning', 'statuses'],
             'operation': 'getOrganizationDevicesProvisioningStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/provisioning/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/devices/provisioning/statuses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'productTypes', 'serials', 'status', 'tags', 'tagsFilterType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1741,8 +1660,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'statuses'],
             'operation': 'getOrganizationDevicesStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/devices/statuses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'statuses', 'productTypes', 'models', 'tags', 'tagsFilterType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1773,8 +1691,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'statuses', 'overview'],
             'operation': 'getOrganizationDevicesStatusesOverview'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/statuses/overview'
+        resource = f'/organizations/{prepare(organizationId)}/devices/statuses/overview'
 
         query_params = ['productTypes', 'networkIds', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1817,8 +1734,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'uplinks', 'addresses', 'byDevice'],
             'operation': 'getOrganizationDevicesUplinksAddressesByDevice'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/uplinks/addresses/byDevice'
+        resource = f'/organizations/{prepare(organizationId)}/devices/uplinks/addresses/byDevice'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'productTypes', 'serials', 'tags', 'tagsFilterType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1856,8 +1772,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'devices', 'uplinks', 'uplinksLossAndLatency'],
             'operation': 'getOrganizationDevicesUplinksLossAndLatency'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/devices/uplinksLossAndLatency'
+        resource = f'/organizations/{prepare(organizationId)}/devices/uplinksLossAndLatency'
 
         query_params = ['t0', 't1', 'timespan', 'uplink', 'ip', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -1878,8 +1793,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features'],
             'operation': 'getOrganizationEarlyAccessFeatures'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features'
 
         return self._session.get(metadata, resource)
         
@@ -1897,8 +1811,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features', 'optIns'],
             'operation': 'getOrganizationEarlyAccessFeaturesOptIns'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features/optIns'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features/optIns'
 
         return self._session.get(metadata, resource)
         
@@ -1920,8 +1833,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features', 'optIns'],
             'operation': 'createOrganizationEarlyAccessFeaturesOptIn'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features/optIns'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features/optIns'
 
         body_params = ['shortName', 'limitScopeToNetworks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1943,9 +1855,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features', 'optIns'],
             'operation': 'getOrganizationEarlyAccessFeaturesOptIn'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        optInId = urllib.parse.quote(str(optInId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features/optIns/{optInId}'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features/optIns/{prepare(optInId)}'
 
         return self._session.get(metadata, resource)
         
@@ -1967,9 +1877,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features', 'optIns'],
             'operation': 'updateOrganizationEarlyAccessFeaturesOptIn'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        optInId = urllib.parse.quote(str(optInId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features/optIns/{optInId}'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features/optIns/{prepare(optInId)}'
 
         body_params = ['limitScopeToNetworks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -1991,9 +1899,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'earlyAccess', 'features', 'optIns'],
             'operation': 'deleteOrganizationEarlyAccessFeaturesOptIn'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        optInId = urllib.parse.quote(str(optInId), safe='')
-        resource = f'/organizations/{organizationId}/earlyAccess/features/optIns/{optInId}'
+        resource = f'/organizations/{prepare(organizationId)}/earlyAccess/features/optIns/{prepare(optInId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2020,8 +1926,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'firmware', 'upgrades'],
             'operation': 'getOrganizationFirmwareUpgrades'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/firmware/upgrades'
+        resource = f'/organizations/{prepare(organizationId)}/firmware/upgrades'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'status', 'productTypes', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2060,8 +1965,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'firmware', 'upgrades', 'byDevice'],
             'operation': 'getOrganizationFirmwareUpgradesByDevice'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/firmware/upgrades/byDevice'
+        resource = f'/organizations/{prepare(organizationId)}/firmware/upgrades/byDevice'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'macs', 'firmwareUpgradeBatchIds', 'upgradeStatuses', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2093,8 +1997,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory'],
             'operation': 'claimIntoOrganizationInventory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/claim'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/claim'
 
         body_params = ['orders', 'serials', 'licenses', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2139,8 +2042,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'devices'],
             'operation': 'getOrganizationInventoryDevices'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/devices'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/devices'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'usedState', 'search', 'macs', 'networkIds', 'serials', 'models', 'orderNumbers', 'tags', 'tagsFilterType', 'productTypes', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2168,9 +2070,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'devices'],
             'operation': 'getOrganizationInventoryDevice'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/organizations/{organizationId}/inventory/devices/{serial}'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/devices/{prepare(serial)}'
 
         return self._session.get(metadata, resource)
         
@@ -2194,8 +2094,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'onboarding', 'cloudMonitoring', 'exportEvents'],
             'operation': 'createOrganizationInventoryOnboardingCloudMonitoringExportEvent'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/onboarding/cloudMonitoring/exportEvents'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/onboarding/cloudMonitoring/exportEvents'
 
         body_params = ['logEvent', 'timestamp', 'targetOS', 'request', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2219,8 +2118,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'onboarding', 'cloudMonitoring', 'imports'],
             'operation': 'createOrganizationInventoryOnboardingCloudMonitoringImport'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/onboarding/cloudMonitoring/imports'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/onboarding/cloudMonitoring/imports'
 
         body_params = ['devices', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2244,8 +2142,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'onboarding', 'cloudMonitoring', 'imports'],
             'operation': 'getOrganizationInventoryOnboardingCloudMonitoringImports'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/onboarding/cloudMonitoring/imports'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/onboarding/cloudMonitoring/imports'
 
         query_params = ['importIds', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2285,8 +2182,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'onboarding', 'cloudMonitoring', 'networks'],
             'operation': 'getOrganizationInventoryOnboardingCloudMonitoringNetworks'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/onboarding/cloudMonitoring/networks'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/onboarding/cloudMonitoring/networks'
 
         query_params = ['deviceType', 'search', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2310,8 +2206,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory', 'onboarding', 'cloudMonitoring', 'prepare'],
             'operation': 'createOrganizationInventoryOnboardingCloudMonitoringPrepare'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/onboarding/cloudMonitoring/prepare'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/onboarding/cloudMonitoring/prepare'
 
         body_params = ['devices', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2335,8 +2230,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'inventory'],
             'operation': 'releaseFromOrganizationInventory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/inventory/release'
+        resource = f'/organizations/{prepare(organizationId)}/inventory/release'
 
         body_params = ['serials', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2371,8 +2265,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'getOrganizationLicenses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses'
+        resource = f'/organizations/{prepare(organizationId)}/licenses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'deviceSerial', 'networkId', 'state', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2398,8 +2291,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'assignOrganizationLicensesSeats'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/assignSeats'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/assignSeats'
 
         body_params = ['licenseId', 'networkId', 'seatCount', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2424,8 +2316,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'moveOrganizationLicenses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/move'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/move'
 
         body_params = ['destOrganizationId', 'licenseIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2451,8 +2342,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'moveOrganizationLicensesSeats'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/moveSeats'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/moveSeats'
 
         body_params = ['destOrganizationId', 'licenseId', 'seatCount', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2473,8 +2363,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'licenses', 'overview'],
             'operation': 'getOrganizationLicensesOverview'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/overview'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/overview'
 
         return self._session.get(metadata, resource)
         
@@ -2496,8 +2385,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'renewOrganizationLicensesSeats'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/renewSeats'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/renewSeats'
 
         body_params = ['licenseIdToRenew', 'unusedLicenseId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2519,9 +2407,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'getOrganizationLicense'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        licenseId = urllib.parse.quote(str(licenseId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/{licenseId}'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/{prepare(licenseId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2543,9 +2429,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'licenses'],
             'operation': 'updateOrganizationLicense'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        licenseId = urllib.parse.quote(str(licenseId), safe='')
-        resource = f'/organizations/{organizationId}/licenses/{licenseId}'
+        resource = f'/organizations/{prepare(organizationId)}/licenses/{prepare(licenseId)}'
 
         body_params = ['deviceSerial', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2566,8 +2450,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'loginSecurity'],
             'operation': 'getOrganizationLoginSecurity'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/loginSecurity'
+        resource = f'/organizations/{prepare(organizationId)}/loginSecurity'
 
         return self._session.get(metadata, resource)
         
@@ -2600,8 +2483,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'loginSecurity'],
             'operation': 'updateOrganizationLoginSecurity'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/loginSecurity'
+        resource = f'/organizations/{prepare(organizationId)}/loginSecurity'
 
         body_params = ['enforcePasswordExpiration', 'passwordExpirationDays', 'enforceDifferentPasswords', 'numDifferentPasswords', 'enforceStrongPasswords', 'enforceAccountLockout', 'accountLockoutAttempts', 'enforceIdleTimeout', 'idleTimeoutMinutes', 'enforceTwoFactorAuth', 'enforceLoginIpRanges', 'loginIpRanges', 'apiAuthentication', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2637,8 +2519,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'networks'],
             'operation': 'getOrganizationNetworks'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/networks'
+        resource = f'/organizations/{prepare(organizationId)}/networks'
 
         query_params = ['configTemplateId', 'isBoundToConfigTemplate', 'tags', 'tagsFilterType', 'perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2673,8 +2554,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'networks'],
             'operation': 'createOrganizationNetwork'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/networks'
+        resource = f'/organizations/{prepare(organizationId)}/networks'
 
         body_params = ['name', 'productTypes', 'tags', 'timeZone', 'copyFromNetworkId', 'notes', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2700,8 +2580,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'networks'],
             'operation': 'combineOrganizationNetworks'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/networks/combine'
+        resource = f'/organizations/{prepare(organizationId)}/networks/combine'
 
         body_params = ['name', 'networkIds', 'enrollmentString', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2729,8 +2608,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'openapiSpec'],
             'operation': 'getOrganizationOpenapiSpec'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/openapiSpec'
+        resource = f'/organizations/{prepare(organizationId)}/openapiSpec'
 
         query_params = ['version', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2758,8 +2636,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'getOrganizationPolicyObjects'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2790,8 +2667,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'createOrganizationPolicyObject'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects'
 
         body_params = ['name', 'category', 'type', 'cidr', 'fqdn', 'mask', 'ip', 'groupIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2819,8 +2695,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'getOrganizationPolicyObjectsGroups'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/groups'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -2846,8 +2721,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'createOrganizationPolicyObjectsGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/groups'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups'
 
         body_params = ['name', 'category', 'objectIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2869,9 +2743,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'getOrganizationPolicyObjectsGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
 
         return self._session.get(metadata, resource)
         
@@ -2894,9 +2767,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'updateOrganizationPolicyObjectsGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
 
         body_params = ['name', 'objectIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2918,9 +2790,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'deleteOrganizationPolicyObjectsGroup'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
 
         return self._session.delete(metadata, resource)
         
@@ -2939,9 +2810,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'getOrganizationPolicyObject'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
 
         return self._session.get(metadata, resource)
         
@@ -2968,9 +2838,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'updateOrganizationPolicyObject'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
 
         body_params = ['name', 'cidr', 'fqdn', 'mask', 'ip', 'groupIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2992,9 +2861,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'deleteOrganizationPolicyObject'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{organizationId}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
 
         return self._session.delete(metadata, resource)
         
@@ -3012,8 +2880,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml'],
             'operation': 'getOrganizationSaml'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/saml'
+        resource = f'/organizations/{prepare(organizationId)}/saml'
 
         return self._session.get(metadata, resource)
         
@@ -3034,8 +2901,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml'],
             'operation': 'updateOrganizationSaml'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/saml'
+        resource = f'/organizations/{prepare(organizationId)}/saml'
 
         body_params = ['enabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3056,8 +2922,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'getOrganizationSamlIdps'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/saml/idps'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps'
 
         return self._session.get(metadata, resource)
         
@@ -3079,8 +2944,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'createOrganizationSamlIdp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/saml/idps'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps'
 
         body_params = ['x509certSha1Fingerprint', 'sloLogoutUrl', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3106,9 +2970,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'updateOrganizationSamlIdp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{organizationId}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
 
         body_params = ['x509certSha1Fingerprint', 'sloLogoutUrl', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3130,9 +2993,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'getOrganizationSamlIdp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{organizationId}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
 
         return self._session.get(metadata, resource)
         
@@ -3151,9 +3013,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'deleteOrganizationSamlIdp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{organizationId}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
 
         return self._session.delete(metadata, resource)
         
@@ -3171,8 +3032,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'getOrganizationSamlRoles'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/samlRoles'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles'
 
         return self._session.get(metadata, resource)
         
@@ -3200,8 +3060,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'createOrganizationSamlRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/samlRoles'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles'
 
         body_params = ['role', 'orgAccess', 'tags', 'networks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3223,9 +3082,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'getOrganizationSamlRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{organizationId}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
 
         return self._session.get(metadata, resource)
         
@@ -3254,9 +3112,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'updateOrganizationSamlRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{organizationId}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
 
         body_params = ['role', 'orgAccess', 'tags', 'networks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3278,9 +3135,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'deleteOrganizationSamlRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{organizationId}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
 
         return self._session.delete(metadata, resource)
         
@@ -3298,8 +3154,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'snmp'],
             'operation': 'getOrganizationSnmp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/snmp'
+        resource = f'/organizations/{prepare(organizationId)}/snmp'
 
         return self._session.get(metadata, resource)
         
@@ -3333,8 +3188,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'snmp'],
             'operation': 'updateOrganizationSnmp'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/snmp'
+        resource = f'/organizations/{prepare(organizationId)}/snmp'
 
         body_params = ['v2cEnabled', 'v3Enabled', 'v3AuthMode', 'v3AuthPass', 'v3PrivMode', 'v3PrivPass', 'peerIps', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3360,8 +3214,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'appliances', 'byUtilization'],
             'operation': 'getOrganizationSummaryTopAppliancesByUtilization'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/appliances/byUtilization'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/appliances/byUtilization'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3387,8 +3240,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'clients', 'byUsage'],
             'operation': 'getOrganizationSummaryTopClientsByUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/clients/byUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/clients/byUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3414,8 +3266,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'clients', 'manufacturers', 'byUsage'],
             'operation': 'getOrganizationSummaryTopClientsManufacturersByUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/clients/manufacturers/byUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/clients/manufacturers/byUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3441,8 +3292,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'devices', 'byUsage'],
             'operation': 'getOrganizationSummaryTopDevicesByUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/devices/byUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/devices/byUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3468,8 +3318,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'devices', 'models', 'byUsage'],
             'operation': 'getOrganizationSummaryTopDevicesModelsByUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/devices/models/byUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/devices/models/byUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3495,8 +3344,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'ssids', 'byUsage'],
             'operation': 'getOrganizationSummaryTopSsidsByUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/ssids/byUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/ssids/byUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3522,8 +3370,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'summary', 'top', 'switches', 'byEnergyUsage'],
             'operation': 'getOrganizationSummaryTopSwitchesByEnergyUsage'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/summary/top/switches/byEnergyUsage'
+        resource = f'/organizations/{prepare(organizationId)}/summary/top/switches/byEnergyUsage'
 
         query_params = ['t0', 't1', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3554,8 +3401,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'uplinks', 'statuses'],
             'operation': 'getOrganizationUplinksStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/uplinks/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/uplinks/statuses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'iccids', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3589,8 +3435,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'webhooks', 'alertTypes'],
             'operation': 'getOrganizationWebhooksAlertTypes'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/webhooks/alertTypes'
+        resource = f'/organizations/{prepare(organizationId)}/webhooks/alertTypes'
 
         query_params = ['productType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -3612,9 +3457,8 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'webhooks', 'callbacks', 'statuses'],
             'operation': 'getOrganizationWebhooksCallbacksStatus'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         callbackId = urllib.parse.quote(str(callbackId), safe='')
-        resource = f'/organizations/{organizationId}/webhooks/callbacks/statuses/{callbackId}'
+        resource = f'/organizations/{prepare(organizationId)}/webhooks/callbacks/statuses/{callbackId}'
 
         return self._session.get(metadata, resource)
         
@@ -3643,8 +3487,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'monitor', 'webhooks', 'logs'],
             'operation': 'getOrganizationWebhooksLogs'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/webhooks/logs'
+        resource = f'/organizations/{prepare(organizationId)}/webhooks/logs'
 
         query_params = ['t0', 't1', 'timespan', 'perPage', 'startingAfter', 'endingBefore', 'url', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
