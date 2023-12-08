@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class Insight(object):
@@ -27,9 +28,7 @@ class Insight(object):
             'tags': ['insight', 'monitor', 'applications', 'healthByTime'],
             'operation': 'getNetworkInsightApplicationHealthByTime'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        applicationId = urllib.parse.quote(str(applicationId), safe='')
-        resource = f'/networks/{networkId}/insight/applications/{applicationId}/healthByTime'
+        resource = f'/networks/{prepare(networkId)}/insight/applications/{prepare(applicationId)}/healthByTime'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
