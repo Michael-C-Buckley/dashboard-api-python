@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncInsight:
@@ -27,9 +28,7 @@ class AsyncInsight:
             'tags': ['insight', 'monitor', 'applications', 'healthByTime'],
             'operation': 'getNetworkInsightApplicationHealthByTime'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        applicationId = urllib.parse.quote(str(applicationId), safe='')
-        resource = f'/networks/{networkId}/insight/applications/{applicationId}/healthByTime'
+        resource = f'/networks/{prepare(networkId)}/insight/applications/{prepare(applicationId)}/healthByTime'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -50,8 +49,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'applications'],
             'operation': 'getOrganizationInsightApplications'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/applications'
+        resource = f'/organizations/{prepare(organizationId)}/insight/applications'
 
         return self._session.get(metadata, resource)
         
@@ -69,8 +67,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'getOrganizationInsightMonitoredMediaServers'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers'
 
         return self._session.get(metadata, resource)
         
@@ -93,8 +90,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'createOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers'
 
         body_params = ['name', 'address', 'bestEffortMonitoringEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -116,9 +112,8 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'getOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
 
         return self._session.get(metadata, resource)
         
@@ -142,9 +137,8 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'updateOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
 
         body_params = ['name', 'address', 'bestEffortMonitoringEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -166,9 +160,8 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'deleteOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
         monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
 
         return self._session.delete(metadata, resource)
         
