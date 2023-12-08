@@ -1,4 +1,3 @@
-import urllib
 from meraki.common import prepare_url_item as prepare
 
 
@@ -49,8 +48,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'applications'],
             'operation': 'getOrganizationInsightApplications'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/applications'
+        resource = f'/organizations/{prepare(organizationId)}/insight/applications'
 
         return self._session.get(metadata, resource)
         
@@ -68,8 +66,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'getOrganizationInsightMonitoredMediaServers'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers'
 
         return self._session.get(metadata, resource)
         
@@ -92,8 +89,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'createOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers'
 
         body_params = ['name', 'address', 'bestEffortMonitoringEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -115,9 +111,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'getOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         return self._session.get(metadata, resource)
         
@@ -141,9 +135,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'updateOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         body_params = ['name', 'address', 'bestEffortMonitoringEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -165,9 +157,7 @@ class Insight(object):
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'deleteOrganizationInsightMonitoredMediaServer'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{organizationId}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         return self._session.delete(metadata, resource)
         
