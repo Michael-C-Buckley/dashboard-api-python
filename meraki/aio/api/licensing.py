@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class AsyncLicensing:
@@ -29,8 +30,7 @@ class AsyncLicensing:
             'tags': ['licensing', 'configure', 'coterm', 'licenses'],
             'operation': 'getOrganizationLicensingCotermLicenses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licensing/coterm/licenses'
+        resource = f'/organizations/{prepare(organizationId)}/licensing/coterm/licenses'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'invalidated', 'expired', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -55,8 +55,7 @@ class AsyncLicensing:
             'tags': ['licensing', 'configure', 'coterm', 'licenses'],
             'operation': 'moveOrganizationLicensingCotermLicenses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/licensing/coterm/licenses/move'
+        resource = f'/organizations/{prepare(organizationId)}/licensing/coterm/licenses/move'
 
         body_params = ['destination', 'licenses', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
