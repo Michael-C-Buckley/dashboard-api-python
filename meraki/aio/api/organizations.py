@@ -2743,8 +2743,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'getOrganizationPolicyObjectsGroup'
         }
-        policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{prepare(policyObjectGroupId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2767,8 +2766,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'updateOrganizationPolicyObjectsGroup'
         }
-        policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{prepare(policyObjectGroupId)}'
 
         body_params = ['name', 'objectIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2790,8 +2788,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects', 'groups'],
             'operation': 'deleteOrganizationPolicyObjectsGroup'
         }
-        policyObjectGroupId = urllib.parse.quote(str(policyObjectGroupId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{policyObjectGroupId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/groups/{prepare(policyObjectGroupId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2810,8 +2807,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'getOrganizationPolicyObject'
         }
-        policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{prepare(policyObjectId)}'
 
         return self._session.get(metadata, resource)
         
@@ -2838,8 +2834,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'updateOrganizationPolicyObject'
         }
-        policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{prepare(policyObjectId)}'
 
         body_params = ['name', 'cidr', 'fqdn', 'mask', 'ip', 'groupIds', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2861,8 +2856,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'policyObjects'],
             'operation': 'deleteOrganizationPolicyObject'
         }
-        policyObjectId = urllib.parse.quote(str(policyObjectId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{policyObjectId}'
+        resource = f'/organizations/{prepare(organizationId)}/policyObjects/{prepare(policyObjectId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -2970,8 +2964,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'updateOrganizationSamlIdp'
         }
-        idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{prepare(idpId)}'
 
         body_params = ['x509certSha1Fingerprint', 'sloLogoutUrl', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2993,8 +2986,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'getOrganizationSamlIdp'
         }
-        idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{prepare(idpId)}'
 
         return self._session.get(metadata, resource)
         
@@ -3013,8 +3005,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'saml', 'idps'],
             'operation': 'deleteOrganizationSamlIdp'
         }
-        idpId = urllib.parse.quote(str(idpId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{idpId}'
+        resource = f'/organizations/{prepare(organizationId)}/saml/idps/{prepare(idpId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -3082,8 +3073,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'getOrganizationSamlRole'
         }
-        samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{prepare(samlRoleId)}'
 
         return self._session.get(metadata, resource)
         
@@ -3112,8 +3102,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'updateOrganizationSamlRole'
         }
-        samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{prepare(samlRoleId)}'
 
         body_params = ['role', 'orgAccess', 'tags', 'networks', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -3135,8 +3124,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'samlRoles'],
             'operation': 'deleteOrganizationSamlRole'
         }
-        samlRoleId = urllib.parse.quote(str(samlRoleId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{samlRoleId}'
+        resource = f'/organizations/{prepare(organizationId)}/samlRoles/{prepare(samlRoleId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -3457,8 +3445,7 @@ class AsyncOrganizations:
             'tags': ['organizations', 'configure', 'webhooks', 'callbacks', 'statuses'],
             'operation': 'getOrganizationWebhooksCallbacksStatus'
         }
-        callbackId = urllib.parse.quote(str(callbackId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/webhooks/callbacks/statuses/{callbackId}'
+        resource = f'/organizations/{prepare(organizationId)}/webhooks/callbacks/statuses/{prepare(callbackId)}'
 
         return self._session.get(metadata, resource)
         

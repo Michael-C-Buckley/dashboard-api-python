@@ -112,8 +112,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'getOrganizationInsightMonitoredMediaServer'
         }
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         return self._session.get(metadata, resource)
         
@@ -137,8 +136,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'updateOrganizationInsightMonitoredMediaServer'
         }
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         body_params = ['name', 'address', 'bestEffortMonitoringEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -160,8 +158,7 @@ class AsyncInsight:
             'tags': ['insight', 'configure', 'monitoredMediaServers'],
             'operation': 'deleteOrganizationInsightMonitoredMediaServer'
         }
-        monitoredMediaServerId = urllib.parse.quote(str(monitoredMediaServerId), safe='')
-        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{monitoredMediaServerId}'
+        resource = f'/organizations/{prepare(organizationId)}/insight/monitoredMediaServers/{prepare(monitoredMediaServerId)}'
 
         return self._session.delete(metadata, resource)
         
