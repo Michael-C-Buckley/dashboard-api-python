@@ -1,4 +1,3 @@
-import urllib
 from meraki.common import prepare_url_item as prepare
 
 

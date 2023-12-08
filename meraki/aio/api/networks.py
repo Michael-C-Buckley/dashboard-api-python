@@ -1,4 +1,3 @@
-import urllib
 from meraki.common import prepare_url_item as prepare
 
 
@@ -1784,7 +1783,6 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'pii', 'requests'],
             'operation': 'deleteNetworkPiiRequest'
         }
-        requestId = urllib.parse.quote(str(requestId), safe='')
         resource = f'/networks/{prepare(networkId)}/pii/requests/{prepare(requestId)}'
 
         return self._session.delete(metadata, resource)
@@ -2341,8 +2339,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'getNetworkVlanProfile'
         }
-        iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{prepare(iname)}'
 
         return self._session.get(metadata, resource)
         
@@ -2366,8 +2363,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'updateNetworkVlanProfile'
         }
-        iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{prepare(iname)}'
 
         body_params = ['name', 'vlanNames', 'vlanGroups', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -2389,8 +2385,7 @@ class AsyncNetworks:
             'tags': ['networks', 'configure', 'vlanProfiles'],
             'operation': 'deleteNetworkVlanProfile'
         }
-        iname = urllib.parse.quote(str(iname), safe='')
-        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{iname}'
+        resource = f'/networks/{prepare(networkId)}/vlanProfiles/{prepare(iname)}'
 
         return self._session.delete(metadata, resource)
         
