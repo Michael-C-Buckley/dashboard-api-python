@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class Devices(object):
@@ -20,8 +21,7 @@ class Devices(object):
             'tags': ['devices', 'configure'],
             'operation': 'getDevice'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}'
+        resource = f'/devices/{prepare(serial)}'
 
         return self._session.get(metadata, resource)
         
@@ -50,8 +50,7 @@ class Devices(object):
             'tags': ['devices', 'configure'],
             'operation': 'updateDevice'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}'
+        resource = f'/devices/{prepare(serial)}'
 
         body_params = ['name', 'tags', 'lat', 'lng', 'address', 'notes', 'moveMapMarker', 'switchProfileId', 'floorPlanId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -77,8 +76,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools'],
             'operation': 'blinkDeviceLeds'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/blinkLeds'
+        resource = f'/devices/{prepare(serial)}/blinkLeds'
 
         body_params = ['duration', 'period', 'duty', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -99,8 +97,7 @@ class Devices(object):
             'tags': ['devices', 'configure', 'cellular', 'sims'],
             'operation': 'getDeviceCellularSims'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellular/sims'
+        resource = f'/devices/{prepare(serial)}/cellular/sims'
 
         return self._session.get(metadata, resource)
         
@@ -122,8 +119,7 @@ class Devices(object):
             'tags': ['devices', 'configure', 'cellular', 'sims'],
             'operation': 'updateDeviceCellularSims'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/cellular/sims'
+        resource = f'/devices/{prepare(serial)}/cellular/sims'
 
         body_params = ['sims', 'simFailover', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -148,8 +144,7 @@ class Devices(object):
             'tags': ['devices', 'monitor', 'clients'],
             'operation': 'getDeviceClients'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/clients'
+        resource = f'/devices/{prepare(serial)}/clients'
 
         query_params = ['t0', 'timespan', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -175,8 +170,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools', 'ping'],
             'operation': 'createDeviceLiveToolsPing'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/liveTools/ping'
+        resource = f'/devices/{prepare(serial)}/liveTools/ping'
 
         body_params = ['target', 'count', 'callback', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -198,9 +192,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools', 'ping'],
             'operation': 'getDeviceLiveToolsPing'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/devices/{serial}/liveTools/ping/{id}'
+        resource = f'/devices/{prepare(serial)}/liveTools/ping/{prepare(id)}'
 
         return self._session.get(metadata, resource)
         
@@ -222,8 +214,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools', 'pingDevice'],
             'operation': 'createDeviceLiveToolsPingDevice'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/liveTools/pingDevice'
+        resource = f'/devices/{prepare(serial)}/liveTools/pingDevice'
 
         body_params = ['count', 'callback', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -245,9 +236,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools', 'pingDevice'],
             'operation': 'getDeviceLiveToolsPingDevice'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        id = urllib.parse.quote(str(id), safe='')
-        resource = f'/devices/{serial}/liveTools/pingDevice/{id}'
+        resource = f'/devices/{prepare(serial)}/liveTools/pingDevice/{prepare(id)}'
 
         return self._session.get(metadata, resource)
         
@@ -265,8 +254,7 @@ class Devices(object):
             'tags': ['devices', 'monitor', 'lldpCdp'],
             'operation': 'getDeviceLldpCdp'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/lldpCdp'
+        resource = f'/devices/{prepare(serial)}/lldpCdp'
 
         return self._session.get(metadata, resource)
         
@@ -296,8 +284,7 @@ class Devices(object):
             'tags': ['devices', 'monitor', 'uplinks', 'lossAndLatencyHistory'],
             'operation': 'getDeviceLossAndLatencyHistory'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/lossAndLatencyHistory'
+        resource = f'/devices/{prepare(serial)}/lossAndLatencyHistory'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', 'uplink', 'ip', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -318,8 +305,7 @@ class Devices(object):
             'tags': ['devices', 'configure', 'managementInterface'],
             'operation': 'getDeviceManagementInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/managementInterface'
+        resource = f'/devices/{prepare(serial)}/managementInterface'
 
         return self._session.get(metadata, resource)
         
@@ -341,8 +327,7 @@ class Devices(object):
             'tags': ['devices', 'configure', 'managementInterface'],
             'operation': 'updateDeviceManagementInterface'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/managementInterface'
+        resource = f'/devices/{prepare(serial)}/managementInterface'
 
         body_params = ['wan1', 'wan2', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -363,8 +348,7 @@ class Devices(object):
             'tags': ['devices', 'liveTools'],
             'operation': 'rebootDevice'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/reboot'
+        resource = f'/devices/{prepare(serial)}/reboot'
 
         return self._session.post(metadata, resource)
         
