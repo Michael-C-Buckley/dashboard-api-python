@@ -314,8 +314,7 @@ class AsyncSensor:
             'tags': ['sensor', 'monitor', 'readings', 'history'],
             'operation': 'getOrganizationSensorReadingsHistory'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sensor/readings/history'
+        resource = f'/organizations/{prepare(organizationId)}/sensor/readings/history'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 't0', 't1', 'timespan', 'networkIds', 'serials', 'metrics', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -352,8 +351,7 @@ class AsyncSensor:
             'tags': ['sensor', 'monitor', 'readings', 'latest'],
             'operation': 'getOrganizationSensorReadingsLatest'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/sensor/readings/latest'
+        resource = f'/organizations/{prepare(organizationId)}/sensor/readings/latest'
 
         query_params = ['perPage', 'startingAfter', 'endingBefore', 'networkIds', 'serials', 'metrics', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
