@@ -1,4 +1,5 @@
 import urllib
+from meraki.common import prepare_url_item as prepare
 
 
 class Camera(object):
@@ -20,8 +21,7 @@ class Camera(object):
             'tags': ['camera', 'monitor', 'analytics', 'live'],
             'operation': 'getDeviceCameraAnalyticsLive'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/analytics/live'
+        resource = f'/devices/{prepare(serial)}/camera/analytics/live'
 
         return self._session.get(metadata, resource)
         
@@ -49,8 +49,7 @@ class Camera(object):
             'tags': ['camera', 'monitor', 'analytics', 'overview'],
             'operation': 'getDeviceCameraAnalyticsOverview'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/analytics/overview'
+        resource = f'/devices/{prepare(serial)}/camera/analytics/overview'
 
         query_params = ['t0', 't1', 'timespan', 'objectType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -78,8 +77,7 @@ class Camera(object):
             'tags': ['camera', 'monitor', 'analytics', 'recent'],
             'operation': 'getDeviceCameraAnalyticsRecent'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/analytics/recent'
+        resource = f'/devices/{prepare(serial)}/camera/analytics/recent'
 
         query_params = ['objectType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -100,8 +98,7 @@ class Camera(object):
             'tags': ['camera', 'monitor', 'analytics', 'zones'],
             'operation': 'getDeviceCameraAnalyticsZones'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/analytics/zones'
+        resource = f'/devices/{prepare(serial)}/camera/analytics/zones'
 
         return self._session.get(metadata, resource)
         
@@ -131,9 +128,7 @@ class Camera(object):
             'tags': ['camera', 'monitor', 'analytics', 'zones', 'history'],
             'operation': 'getDeviceCameraAnalyticsZoneHistory'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        zoneId = urllib.parse.quote(str(zoneId), safe='')
-        resource = f'/devices/{serial}/camera/analytics/zones/{zoneId}/history'
+        resource = f'/devices/{prepare(serial)}/camera/analytics/zones/{prepare(zoneId)}/history'
 
         query_params = ['t0', 't1', 'timespan', 'resolution', 'objectType', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -154,8 +149,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics'],
             'operation': 'getDeviceCameraCustomAnalytics'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/customAnalytics'
+        resource = f'/devices/{prepare(serial)}/camera/customAnalytics'
 
         return self._session.get(metadata, resource)
         
@@ -178,8 +172,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics'],
             'operation': 'updateDeviceCameraCustomAnalytics'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/customAnalytics'
+        resource = f'/devices/{prepare(serial)}/camera/customAnalytics'
 
         body_params = ['enabled', 'artifactId', 'parameters', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -204,8 +197,7 @@ class Camera(object):
             'tags': ['camera', 'monitor'],
             'operation': 'generateDeviceCameraSnapshot'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/generateSnapshot'
+        resource = f'/devices/{prepare(serial)}/camera/generateSnapshot'
 
         body_params = ['timestamp', 'fullframe', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -226,8 +218,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityAndRetention'],
             'operation': 'getDeviceCameraQualityAndRetention'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/qualityAndRetention'
+        resource = f'/devices/{prepare(serial)}/camera/qualityAndRetention'
 
         return self._session.get(metadata, resource)
         
@@ -264,8 +255,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityAndRetention'],
             'operation': 'updateDeviceCameraQualityAndRetention'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/qualityAndRetention'
+        resource = f'/devices/{prepare(serial)}/camera/qualityAndRetention'
 
         body_params = ['profileId', 'motionBasedRetentionEnabled', 'audioRecordingEnabled', 'restrictedBandwidthModeEnabled', 'quality', 'resolution', 'motionDetectorVersion', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -286,8 +276,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'sense'],
             'operation': 'getDeviceCameraSense'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/sense'
+        resource = f'/devices/{prepare(serial)}/camera/sense'
 
         return self._session.get(metadata, resource)
         
@@ -311,8 +300,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'sense'],
             'operation': 'updateDeviceCameraSense'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/sense'
+        resource = f'/devices/{prepare(serial)}/camera/sense'
 
         body_params = ['senseEnabled', 'mqttBrokerId', 'audioDetection', 'detectionModelId', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -333,8 +321,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'sense', 'objectDetectionModels'],
             'operation': 'getDeviceCameraSenseObjectDetectionModels'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/sense/objectDetectionModels'
+        resource = f'/devices/{prepare(serial)}/camera/sense/objectDetectionModels'
 
         return self._session.get(metadata, resource)
         
@@ -352,8 +339,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'video', 'settings'],
             'operation': 'getDeviceCameraVideoSettings'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/video/settings'
+        resource = f'/devices/{prepare(serial)}/camera/video/settings'
 
         return self._session.get(metadata, resource)
         
@@ -374,8 +360,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'video', 'settings'],
             'operation': 'updateDeviceCameraVideoSettings'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/video/settings'
+        resource = f'/devices/{prepare(serial)}/camera/video/settings'
 
         body_params = ['externalRtspEnabled', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -399,8 +384,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'videoLink'],
             'operation': 'getDeviceCameraVideoLink'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/videoLink'
+        resource = f'/devices/{prepare(serial)}/camera/videoLink'
 
         query_params = ['timestamp', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -421,8 +405,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'getDeviceCameraWirelessProfiles'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/wirelessProfiles'
+        resource = f'/devices/{prepare(serial)}/camera/wirelessProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -443,8 +426,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'updateDeviceCameraWirelessProfiles'
         }
-        serial = urllib.parse.quote(str(serial), safe='')
-        resource = f'/devices/{serial}/camera/wirelessProfiles'
+        resource = f'/devices/{prepare(serial)}/camera/wirelessProfiles'
 
         body_params = ['ids', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -465,8 +447,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityRetentionProfiles'],
             'operation': 'getNetworkCameraQualityRetentionProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/camera/qualityRetentionProfiles'
+        resource = f'/networks/{prepare(networkId)}/camera/qualityRetentionProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -495,8 +476,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityRetentionProfiles'],
             'operation': 'createNetworkCameraQualityRetentionProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/camera/qualityRetentionProfiles'
+        resource = f'/networks/{prepare(networkId)}/camera/qualityRetentionProfiles'
 
         body_params = ['name', 'motionBasedRetentionEnabled', 'restrictedBandwidthModeEnabled', 'audioRecordingEnabled', 'cloudArchiveEnabled', 'motionDetectorVersion', 'scheduleId', 'maxRetentionDays', 'videoSettings', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -518,9 +498,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityRetentionProfiles'],
             'operation': 'getNetworkCameraQualityRetentionProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qualityRetentionProfileId = urllib.parse.quote(str(qualityRetentionProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/qualityRetentionProfiles/{prepare(qualityRetentionProfileId)}'
 
         return self._session.get(metadata, resource)
         
@@ -550,9 +528,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityRetentionProfiles'],
             'operation': 'updateNetworkCameraQualityRetentionProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qualityRetentionProfileId = urllib.parse.quote(str(qualityRetentionProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/qualityRetentionProfiles/{prepare(qualityRetentionProfileId)}'
 
         body_params = ['name', 'motionBasedRetentionEnabled', 'restrictedBandwidthModeEnabled', 'audioRecordingEnabled', 'cloudArchiveEnabled', 'motionDetectorVersion', 'scheduleId', 'maxRetentionDays', 'videoSettings', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -574,9 +550,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'qualityRetentionProfiles'],
             'operation': 'deleteNetworkCameraQualityRetentionProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        qualityRetentionProfileId = urllib.parse.quote(str(qualityRetentionProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/qualityRetentionProfiles/{qualityRetentionProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/qualityRetentionProfiles/{prepare(qualityRetentionProfileId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -594,8 +568,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'schedules'],
             'operation': 'getNetworkCameraSchedules'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/camera/schedules'
+        resource = f'/networks/{prepare(networkId)}/camera/schedules'
 
         return self._session.get(metadata, resource)
         
@@ -618,8 +591,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'createNetworkCameraWirelessProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/camera/wirelessProfiles'
+        resource = f'/networks/{prepare(networkId)}/camera/wirelessProfiles'
 
         body_params = ['name', 'ssid', 'identity', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -640,8 +612,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'getNetworkCameraWirelessProfiles'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        resource = f'/networks/{networkId}/camera/wirelessProfiles'
+        resource = f'/networks/{prepare(networkId)}/camera/wirelessProfiles'
 
         return self._session.get(metadata, resource)
         
@@ -660,9 +631,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'getNetworkCameraWirelessProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        wirelessProfileId = urllib.parse.quote(str(wirelessProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/wirelessProfiles/{wirelessProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/wirelessProfiles/{prepare(wirelessProfileId)}'
 
         return self._session.get(metadata, resource)
         
@@ -686,9 +655,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'updateNetworkCameraWirelessProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        wirelessProfileId = urllib.parse.quote(str(wirelessProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/wirelessProfiles/{wirelessProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/wirelessProfiles/{prepare(wirelessProfileId)}'
 
         body_params = ['name', 'ssid', 'identity', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -710,9 +677,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'wirelessProfiles'],
             'operation': 'deleteNetworkCameraWirelessProfile'
         }
-        networkId = urllib.parse.quote(str(networkId), safe='')
-        wirelessProfileId = urllib.parse.quote(str(wirelessProfileId), safe='')
-        resource = f'/networks/{networkId}/camera/wirelessProfiles/{wirelessProfileId}'
+        resource = f'/networks/{prepare(networkId)}/camera/wirelessProfiles/{prepare(wirelessProfileId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -730,8 +695,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics', 'artifacts'],
             'operation': 'getOrganizationCameraCustomAnalyticsArtifacts'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/customAnalytics/artifacts'
+        resource = f'/organizations/{prepare(organizationId)}/camera/customAnalytics/artifacts'
 
         return self._session.get(metadata, resource)
         
@@ -752,8 +716,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics', 'artifacts'],
             'operation': 'createOrganizationCameraCustomAnalyticsArtifact'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/customAnalytics/artifacts'
+        resource = f'/organizations/{prepare(organizationId)}/camera/customAnalytics/artifacts'
 
         body_params = ['name', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -775,9 +738,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics', 'artifacts'],
             'operation': 'getOrganizationCameraCustomAnalyticsArtifact'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        artifactId = urllib.parse.quote(str(artifactId), safe='')
-        resource = f'/organizations/{organizationId}/camera/customAnalytics/artifacts/{artifactId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/customAnalytics/artifacts/{prepare(artifactId)}'
 
         return self._session.get(metadata, resource)
         
@@ -796,9 +757,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'customAnalytics', 'artifacts'],
             'operation': 'deleteOrganizationCameraCustomAnalyticsArtifact'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        artifactId = urllib.parse.quote(str(artifactId), safe='')
-        resource = f'/organizations/{organizationId}/camera/customAnalytics/artifacts/{artifactId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/customAnalytics/artifacts/{prepare(artifactId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -820,8 +779,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'onboarding', 'statuses'],
             'operation': 'getOrganizationCameraOnboardingStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/onboarding/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/camera/onboarding/statuses'
 
         query_params = ['serials', 'networkIds', ]
         params = {k.strip(): v for k, v in kwargs.items() if k.strip() in query_params}
@@ -852,8 +810,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'onboarding', 'statuses'],
             'operation': 'updateOrganizationCameraOnboardingStatuses'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/onboarding/statuses'
+        resource = f'/organizations/{prepare(organizationId)}/camera/onboarding/statuses'
 
         body_params = ['serial', 'wirelessCredentialsSent', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -874,8 +831,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'permissions'],
             'operation': 'getOrganizationCameraPermissions'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/permissions'
+        resource = f'/organizations/{prepare(organizationId)}/camera/permissions'
 
         return self._session.get(metadata, resource)
         
@@ -894,9 +850,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'permissions'],
             'operation': 'getOrganizationCameraPermission'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        permissionScopeId = urllib.parse.quote(str(permissionScopeId), safe='')
-        resource = f'/organizations/{organizationId}/camera/permissions/{permissionScopeId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/permissions/{prepare(permissionScopeId)}'
 
         return self._session.get(metadata, resource)
         
@@ -914,8 +868,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'roles'],
             'operation': 'getOrganizationCameraRoles'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/roles'
+        resource = f'/organizations/{prepare(organizationId)}/camera/roles'
 
         return self._session.get(metadata, resource)
         
@@ -939,8 +892,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'roles'],
             'operation': 'createOrganizationCameraRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        resource = f'/organizations/{organizationId}/camera/roles'
+        resource = f'/organizations/{prepare(organizationId)}/camera/roles'
 
         body_params = ['name', 'appliedOnDevices', 'appliedOnNetworks', 'appliedOrgWide', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
@@ -962,9 +914,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'roles'],
             'operation': 'getOrganizationCameraRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        roleId = urllib.parse.quote(str(roleId), safe='')
-        resource = f'/organizations/{organizationId}/camera/roles/{roleId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/roles/{prepare(roleId)}'
 
         return self._session.get(metadata, resource)
         
@@ -983,9 +933,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'roles'],
             'operation': 'deleteOrganizationCameraRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        roleId = urllib.parse.quote(str(roleId), safe='')
-        resource = f'/organizations/{organizationId}/camera/roles/{roleId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/roles/{prepare(roleId)}'
 
         return self._session.delete(metadata, resource)
         
@@ -1010,9 +958,7 @@ class Camera(object):
             'tags': ['camera', 'configure', 'roles'],
             'operation': 'updateOrganizationCameraRole'
         }
-        organizationId = urllib.parse.quote(str(organizationId), safe='')
-        roleId = urllib.parse.quote(str(roleId), safe='')
-        resource = f'/organizations/{organizationId}/camera/roles/{roleId}'
+        resource = f'/organizations/{prepare(organizationId)}/camera/roles/{prepare(roleId)}'
 
         body_params = ['name', 'appliedOnDevices', 'appliedOnNetworks', 'appliedOrgWide', ]
         payload = {k.strip(): v for k, v in kwargs.items() if k.strip() in body_params}
