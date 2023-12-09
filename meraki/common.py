@@ -1,5 +1,6 @@
 import platform
 from meraki.exceptions import *
+from urllib import parse
 
 
 def check_python_version():
@@ -26,4 +27,4 @@ def prepare_url_item(string: str) -> str:
     """
     Prepares
     """
-    return urllib.parse.quote(str(string), safe='')
+    return parse.quote(str(string), safe='')
